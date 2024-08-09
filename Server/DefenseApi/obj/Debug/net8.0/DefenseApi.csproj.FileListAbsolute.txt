@@ -31,3 +31,4 @@
 /Users/miguelcerna/Desktop/DefenseThreatProject/Server/DefenseApi/obj/Debug/net8.0/DefenseApi.pdb
 /Users/miguelcerna/Desktop/DefenseThreatProject/Server/DefenseApi/obj/Debug/net8.0/DefenseApi.genruntimeconfig.cache
 /Users/miguelcerna/Desktop/DefenseThreatProject/Server/DefenseApi/obj/Debug/net8.0/ref/DefenseApi.dll
+/Users/miguelcerna/Desktop/DefenseThreatProject/Server/DefenseApi/obj/Debug/net8.0/DefenseApi.sourcelink.json

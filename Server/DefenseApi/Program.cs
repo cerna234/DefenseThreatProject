@@ -1,33 +1,26 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Add services to the container.
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthorization();
 
-// Define endpoints
-app.MapGet("/", () =>
-{
-    // Replace Console.WriteLine with appropriate logging if needed
-    return "Hello World!";
-})
-.WithOpenApi();
-
-app.MapGet("/Test", () =>
-{
-    // Replace Console.WriteLine with appropriate logging if needed
-    return "Test Endpoint";
-})
-.WithOpenApi();
+app.MapControllers();
 
 app.Run();
