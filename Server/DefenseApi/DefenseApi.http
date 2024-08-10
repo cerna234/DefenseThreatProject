@@ -1,6 +1,0 @@
-@DefenseApi_HostAddress = http://localhost:5154
-
-GET {{DefenseApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
