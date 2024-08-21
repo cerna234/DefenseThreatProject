@@ -12,7 +12,7 @@ struct RadarObject {
 };
 
 // Function to generate a random double in the range [min, max]
-double randomDouble(double min, double max);
+double randomDoubleIR(double min, double max);
 
 // Function to generate a random integer in the range [min, max]
 int randomInt(int min, int max);

@@ -6,7 +6,7 @@
 #include <string>
 
 // Generate a random double in the range [min, max]
-double randomDouble(double min, double max) {
+double randomDoubleIR(double min, double max) {
     return min + (max - min) * (rand() / static_cast<double>(RAND_MAX));
 }
 
@@ -20,11 +20,11 @@ int randomInt(int min, int max) {
 // Create a random radar object
 RadarObject createRandomObject() {
     RadarObject obj;
-    obj.x = randomDouble(0.0, 800.0);  // Random x position within a range of 0 to 800
-    obj.y = randomDouble(0.0, 600.0);  // Random y position within a range of 0 to 600
-    obj.vx = randomDouble(-5.0, 5.0);  // Random velocity in the x direction
-    obj.vy = randomDouble(-5.0, 5.0);  // Random velocity in the y direction
-    obj.size = randomDouble(5.0, 20.0);
+    obj.x = randomDoubleIR(0.0, 800.0);  // Random x position within a range of 0 to 800
+    obj.y = randomDoubleIR(0.0, 600.0);  // Random y position within a range of 0 to 600
+    obj.vx = randomDoubleIR(-5.0, 5.0);  // Random velocity in the x direction
+    obj.vy = randomDoubleIR(-5.0, 5.0);  // Random velocity in the y direction
+    obj.size = randomDoubleIR(5.0, 20.0);
     
     return obj;
 }
@@ -56,6 +56,8 @@ void printObjectData(const RadarObject& obj, std::string objectName,int objectNu
     }
    
 }
+
+
 
 // Function will be used to clasify each object that is observed
 void setName(RadarObject& obj, int objectNum){
