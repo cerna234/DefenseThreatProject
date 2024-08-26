@@ -62,6 +62,17 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "__tree": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "stack": "cpp",
+        "typeindex": "cpp",
+        "unordered_set": "cpp",
+        "valarray": "cpp"
     }
 }

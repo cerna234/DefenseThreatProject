@@ -16,13 +16,24 @@ int randomIntIR(int min, int max) {
     std::uniform_int_distribution<> dis(min, max);
     return dis(gen);
 }
-void outputData(InfraredData& obj){
 
-    std::cout << obj.objectName << ", ";
-    std::cout << "X: " <<  obj.x << ", ";
-    std::cout << "Y: " << obj.y << ", ";
-    std::cout << "Intensity: " << obj.intensity << ", ";
-    std::cout << "Temp: " << obj.temperature << std::endl;
+
+std::vector<InfraredData> ProcessData(InfraredData& obj) {
+    // Create a single InfraredData object in a 3D vector
+    
+    std::vector<InfraredData> data = { obj }; // Single 1D vector of InfraredData
+    
+    
+    return data;
+}
+
+void outputData(std::vector<InfraredData> data){
+
+
+   for(auto& row : data){
+    std::cout << "TEST" << std::endl;
+    std::cout << row.objectName << std::endl;
+   }
 
 }
 
@@ -77,8 +88,6 @@ void setRadarName(InfraredData& obj, std::string objectName){
                     obj.objectName = "Human" + std::to_string(randomIntIR(0,1000));
                 
                 
-                
-                
             }
             else if(obj.temperature > 130 && obj.temperature < 200){
                 
@@ -106,5 +115,44 @@ void setRadarName(InfraredData& obj, std::string objectName){
   
 }
 
+std::vector<InfraredData> runInfraredSim(){
+    const int numObjects = randomIntIR(0,3);        // Number of objects to simulate
+    const double timeInterval = 0.1;  // Time step in seconds  
+    const int seconds = 30;     // Number of time steps to simulate
+
+    std::vector<InfraredData> FinalData;
+    // IR(Infrared) data
+    
+
+    // Seed the random number generator
+    srand(static_cast<unsigned>(time(nullptr)));
+
+   
+
+    
+    
+    std::vector<InfraredData> IRobjects(numObjects);
+
+    for(int i = 0; i < seconds; i++){
+
+        //std::cout << "SECONDS" << std::endl;
+
+        for (auto& obj2 : IRobjects) {
+               
+              obj2 = createRandomIRObject();
+              setRadarName(obj2, obj2.objectName);
+              updateIRObject(obj2,timeInterval);
+
+               // ProcessData returns a vector
+              // ProcessData(obj2);
+              FinalData.push_back(obj2);
+               
+            }
+    }
+
+
+   return FinalData;
+    
+}
 
 

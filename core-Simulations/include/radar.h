@@ -28,4 +28,6 @@ void printObjectData(const RadarObject& obj,std::string objectName,int objectNum
 
 void setName(RadarObject& obj,int objectNum);
 
+extern "C" void runRadarSim();
+
 #endif // RADAR_H

@@ -64,3 +64,60 @@ void setName(RadarObject& obj, int objectNum){
     obj.name = "Object" + std::to_string(objectNum);;
 }
 
+extern "C" void runRadarSim(){
+     // Radar data
+    const int numObjects = randomInt(0,3);        // Number of objects to simulate
+    const double timeInterval = 0.1;  // Time step in seconds
+    const int radarSignals = 10;    
+    const int seconds = 30;     // Number of time steps to simulate
+
+    // IR(Infrared) data
+
+
+    // Seed the random number generator
+    srand(static_cast<unsigned>(time(nullptr)));
+
+   
+
+    // Create a vector to store radar objects
+    if(numObjects > 0){
+        std::vector<RadarObject> objects(numObjects);
+
+        
+        
+        for(int i = 0; i < numObjects;){
+            for (auto& obj : objects) {
+            obj = createRandomObject();
+            setName(obj,i); 
+            i++;
+            }
+        }
+        
+
+        // Simulation loop
+    
+        
+            
+
+            for (int signal = 0; signal < radarSignals; ++signal) {
+                std::cout << "SIGNAL:" << signal << std::endl;
+                for (auto& obj : objects) {
+                    
+                    updatePosition(obj, timeInterval);
+                    
+                    // print object will be a function that will store this data into a structure that can be used to analyze
+                    printObjectData(obj,obj.name,numObjects);
+                }
+        
+            //std::cout << std::endl;
+            }
+
+            
+
+            
+        
+    }
+    else{
+        std::cout << "No objects found" << std::endl;
+    }
+}
