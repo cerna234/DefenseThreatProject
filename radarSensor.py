@@ -10,28 +10,42 @@ endHeader= 'f8f7f6f5'
 def detectTargetState(data):
    outPutState = data[16:18]
    stateClassification = ''
-  
+   outputDataOutput = {}
    print("-----------------------------------------------")
  
    if outPutState != '00' or outPutState!= '' :
       
        if outPutState == '01':
            stateClassification = "Moving Target"
-           print(f"TARGET STATE: {stateClassification}")
-           print(" ")
-           print("MOVING TARGET DATA:")
-           print(" ")
-           print(f"Movement Target distance(cm): {int(data[18:22],16)}") #2 bytes
-           print(f"Exercise target Energy value: {data[22:24]}") #1 byte
-           print(" ")
+           
+           #print(f"TARGET STATE: {stateClassification}")
+           #print(" ")
+           #print("MOVING TARGET DATA:")
+           #print(" ")
+           #print(f"Movement Target distance(cm): {int(data[18:22],16)}") #2 bytes
+           #print(f"Exercise target Energy value: {data[22:24]}") #1 byte
+           #print(" ")
+           
+           outputDataOutput['Target State'] = stateClassification
+           outputDataOutput['Movement Target Distance'] =  int(data[18:22],16)
+           outputDataOutput['Movement Target Energy Value'] = data[22:24]
+
+           return outputDataOutput
               
        if outPutState == '02':
            stateClassification = "Stationary Target"
-           print(f"TARGET STATE: {stateClassification}")
-           print("STATIONARY TARGET DATA:")
-           print(" ")
-           print(f"stationary target distance(cm): {int(data[24:28],16)}") #2 bytes
-           print(f"Stationary target energy value: {data[28:30]} ") #1 byte
+
+
+           outputDataOutput['Target State'] = stateClassification
+           outputDataOutput['Stationary Target Distance'] = int(data[24:28],16)
+           outputDataOutput['Stationary Target Energy Value'] = data[28:30]
+           #print(f"TARGET STATE: {stateClassification}")
+           #print("STATIONARY TARGET DATA:")
+           #print(" ")
+           #print(f"stationary target distance(cm): {int(data[24:28],16)}") #2 bytes
+           #print(f"Stationary target energy value: {data[28:30]} ") #1 byte
+
+           return outputDataOutput
                   
        if outPutState == '03':
            stateClassification = "Moving and Stationary Target Found"
@@ -39,34 +53,46 @@ def detectTargetState(data):
 
 
 
+           outputDataOutput['Target State'] = stateClassification
+           outputDataOutput['Stationary Target Distance'] = int(data[24:28],16)
+           outputDataOutput['Stationary Target Energy Value'] = data[28:30]
+
+           outputDataOutput['Target State'] = stateClassification
+           outputDataOutput['Movement Target Distance'] =  int(data[18:22],16)
+           outputDataOutput['Movement Target Energy Value'] = data[22:24]
+
+           outPutState['Detection Distance'] = int(data[30:34],16)
+
+           return outputDataOutput
+      
+           #print("STATIONARY TARGET DATA:")
+           #print(" ")
+           #print(f"stationary target distance(cm): {int(data[24:28],16)}") #2 bytes
+           #print(f"Stationary target energy value: {data[28:30]} ") #1 byte
+
+
+           #print(" ")
+           #print("MOVING TARGET DATA:")
+           #print(" ")
+           #print(f"Movement Target distance(cm): {int(data[18:22],16)}") #2 bytes
+           #print(f"Exercise target Energy value: {data[22:24]}") #1 byte
+           #print(" ")
+
 
       
-           print("STATIONARY TARGET DATA:")
-           print(" ")
-           print(f"stationary target distance(cm): {int(data[24:28],16)}") #2 bytes
-           print(f"Stationary target energy value: {data[28:30]} ") #1 byte
+       #print(f"Detection Distance (cm) {int(data[30:34],16)}") #2 bytes
+       #print(f"DETECTION RAW: {data[30:34]}")
+       #print(" ")
 
 
-           print(" ")
-           print("MOVING TARGET DATA:")
-           print(" ")
-           print(f"Movement Target distance(cm): {int(data[18:22],16)}") #2 bytes
-           print(f"Exercise target Energy value: {data[22:24]}") #1 byte
-           print(" ")
-
-
-      
-       print(f"Detection Distance (cm) {int(data[30:34],16)}") #2 bytes
-       print(f"DETECTION RAW: {data[30:34]}")
-       print(" ")
-
-
-       return True
+       
   
    else:
        stateClassification = "No target Found"
-       print(f"TARGET STATE: {stateClassification}")
-       return False
+       outputDataOutput['Target State'] = stateClassification
+       return outputDataOutput
+       #print(f"TARGET STATE: {stateClassification}")
+       #return False
   
 
 
