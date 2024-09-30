@@ -70,13 +70,14 @@ def detectTargetState(data):
   
 
 
-   print("-------------------------------------------")
 
 
 
+
+sensorStatus = False
 
 try:
-   while True:
+   while sensorStatus:
        if ser.in_waiting > 0:
            raw_data = ser.read(64)
           
