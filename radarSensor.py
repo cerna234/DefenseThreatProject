@@ -49,7 +49,7 @@ def detectTargetState(data):
                   
        if outPutState == '03':
            stateClassification = "Moving and Stationary Target Found"
-           print(f"TARGET STATE: {stateClassification}")
+           #print(f"TARGET STATE: {stateClassification}")
 
 
 
@@ -61,7 +61,7 @@ def detectTargetState(data):
            outputDataOutput['Movement Target Distance'] =  int(data[18:22],16)
            outputDataOutput['Movement Target Energy Value'] = data[22:24]
 
-           outPutState['Detection Distance'] = int(data[30:34],16)
+           outputDataOutput['Detection Distance'] = int(data[30:34],16)
 
            return outputDataOutput
       
@@ -100,7 +100,7 @@ def detectTargetState(data):
 
 
 
-sensorStatus = False
+sensorStatus = True
 
 try:
    while sensorStatus:
@@ -113,7 +113,7 @@ try:
 
 
 
-               detectTargetState(raw_data.hex())
+               print(detectTargetState(raw_data.hex()))
               
                 
                    
