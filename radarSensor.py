@@ -1,5 +1,5 @@
 import serial
-
+import requests
 
 ser = serial.Serial('/dev/serial0', 256000, timeout=1)
 header = 'f4f3f2f1'
@@ -34,7 +34,6 @@ def detectTargetState(data):
               
        if outPutState == '02':
            stateClassification = "Stationary Target"
-
 
            outputDataOutput['Target State'] = stateClassification
            outputDataOutput['Stationary Target Distance'] = int(data[24:28],16)
@@ -87,23 +86,46 @@ def detectTargetState(data):
 
        
   
-   else:
-       stateClassification = "No target Found"
-       outputDataOutput['Target State'] = stateClassification
-       return outputDataOutput
-       #print(f"TARGET STATE: {stateClassification}")
-       #return False
+
   
 
 
 
+def sendTargetData(targetData):
+    try:
+        url = "http://127.0.0.1:5000/sensor-Data"  # Replace with your API endpoint
+        response = requests.post(url, json=targetData)
 
 
+        if response.status_code == 201:
+            print("Data sent successfully:", response.json())
+    except Exception as e:
+        print("Error sending data:", str(e))
 
-sensorStatus = True
+def getSensorStatus():
+    try:
+        url = "http://127.0.0.1:5000/status"
+        response = requests.get(url)
+        if response.status_code == 200:
+        # Parse JSON response
+            data = response.json()
+            sensorStatus = (data['data'][0]['sensorStatus'])
+            return sensorStatus
+        else:
+            print("Failed to retrieve data. Status code:", response.status_code)
+        return response
+    except Exception as e:
+        print("ERROR IN RETRIEVING STATUS: ", str(e))
+
+sensorStatus = getSensorStatus()
+
+print(sensorStatus)
+
 
 try:
-   while sensorStatus:
+
+   while sensorStatus == 'on':
+       sensorStatus = getSensorStatus()
        if ser.in_waiting > 0:
            raw_data = ser.read(64)
           
@@ -113,7 +135,7 @@ try:
 
 
 
-               print(detectTargetState(raw_data.hex()))
+               sendTargetData(detectTargetState(raw_data.hex()))
               
                 
                    
