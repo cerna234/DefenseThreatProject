@@ -47,10 +47,12 @@ def get_sensor_status():
         for doc in data:
             # Convert ObjectId to string
             doc['_id'] = str(doc['_id'])  # Convert ObjectId to string
+            
             formatted_data.append(doc)
+            test = str(doc['sensorStatus'])
 
         # Return the formatted data as JSON
-        return jsonify({"status": "success", "data": formatted_data}), 200
+        return jsonify({"sensorStatus": test}), 200
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500

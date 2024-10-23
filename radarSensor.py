@@ -109,7 +109,7 @@ def getSensorStatus():
         if response.status_code == 200:
         # Parse JSON response
             data = response.json()
-            sensorStatus = (data['data'][0]['sensorStatus'])
+            sensorStatus = (data['sensorStatus'])
             return sensorStatus
         else:
             print("Failed to retrieve data. Status code:", response.status_code)
@@ -117,42 +117,45 @@ def getSensorStatus():
     except Exception as e:
         print("ERROR IN RETRIEVING STATUS: ", str(e))
 
-sensorStatus = getSensorStatus()
 
+sensorStatus = getSensorStatus()
 print(sensorStatus)
 
 
-try:
-
-   while sensorStatus == 'on':
-       sensorStatus = getSensorStatus()
-       if ser.in_waiting > 0:
-           raw_data = ser.read(64)
-          
-          
-           if raw_data.hex()[0:8] == header: # and raw_data.hex()[-8:] == endHeader:
-
-
-
-
-               sendTargetData(detectTargetState(raw_data.hex()))
-              
+def runningSensor():
+    
+        sensorStatus = getSensorStatus()
+        if(sensorStatus == 'off'):
+            print("SENSOR OFF")
+        while sensorStatus == 'on':
+            sensorStatus = getSensorStatus()
+            if ser.in_waiting > 0:
+                raw_data = ser.read(64)
                 
-                   
-                 
-                  
-                  
-                   #print(f"SIZE:  {raw_data.hex()[8:12]}") # Intra-frame data Length
-                   #print(f"DATA TYPE:  {raw_data.hex()[12:14]} ") # Data Type( 1 byte )
-                   #print(f"HEAD: {raw_data.hex()[14:16]}" ) #Head 0xAA
-                   #print(" ")
-             
-                   #print(f"END: {raw_data.hex()[34:36]}")
-                   #print(f"Check: {raw_data.hex()[36:38]} ")
-                   #print(f"REST: {raw_data.hex()[38:46]} " )
-              
-          
-       
+                
+                if raw_data.hex()[0:8] == header: # and raw_data.hex()[-8:] == endHeader:
+
+
+
+
+                    sendTargetData(detectTargetState(raw_data.hex()))
+                    
+                        
+                        
+                        
+                        
+                        
+                        #print(f"SIZE:  {raw_data.hex()[8:12]}") # Intra-frame data Length
+                        #print(f"DATA TYPE:  {raw_data.hex()[12:14]} ") # Data Type( 1 byte )
+                        #print(f"HEAD: {raw_data.hex()[14:16]}" ) #Head 0xAA
+                        #print(" ")
+                    
+                        #print(f"END: {raw_data.hex()[34:36]}")
+                        #print(f"Check: {raw_data.hex()[36:38]} ")
+                        #print(f"REST: {raw_data.hex()[38:46]} " )
+                    
+                
+        
 
 
 
@@ -161,9 +164,14 @@ try:
 
 
 
+   
+
+
+try:
+    while 1 == 1:
+        runningSensor()
+    
 except KeyboardInterrupt:
-   ser.close()
-   print("CLOSED")
-
-
+    ser.close()
+    print("CLOSED")
 
