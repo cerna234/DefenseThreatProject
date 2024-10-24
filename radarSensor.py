@@ -26,18 +26,18 @@ def detectTargetState(data):
            #print(f"Exercise target Energy value: {data[22:24]}") #1 byte
            #print(" ")
            
-           outputDataOutput['Target State'] = stateClassification
-           outputDataOutput['Movement Target Distance'] =  int(data[18:22],16)
-           outputDataOutput['Movement Target Energy Value'] = data[22:24]
+           outputDataOutput['TargetState'] = stateClassification
+           outputDataOutput['MovementTarget Distance'] =  int(data[18:22],16)
+           outputDataOutput['MovementTarget Energy Value'] = data[22:24]
 
            return outputDataOutput
               
        if outPutState == '02':
            stateClassification = "Stationary Target"
 
-           outputDataOutput['Target State'] = stateClassification
-           outputDataOutput['Stationary Target Distance'] = int(data[24:28],16)
-           outputDataOutput['Stationary Target Energy Value'] = data[28:30]
+           outputDataOutput['TargetState'] = stateClassification
+           outputDataOutput['StationaryTargetDistance'] = int(data[24:28],16)
+           outputDataOutput['StationaryTargetEnergy Value'] = data[28:30]
            #print(f"TARGET STATE: {stateClassification}")
            #print("STATIONARY TARGET DATA:")
            #print(" ")
@@ -52,15 +52,15 @@ def detectTargetState(data):
 
 
 
-           outputDataOutput['Target State'] = stateClassification
-           outputDataOutput['Stationary Target Distance'] = int(data[24:28],16)
-           outputDataOutput['Stationary Target Energy Value'] = data[28:30]
+           outputDataOutput['TargetState'] = stateClassification
+           outputDataOutput['StationaryTargetDistance'] = int(data[24:28],16)
+           outputDataOutput['StationaryTargetEnergyValue'] = data[28:30]
 
-           outputDataOutput['Target State'] = stateClassification
-           outputDataOutput['Movement Target Distance'] =  int(data[18:22],16)
-           outputDataOutput['Movement Target Energy Value'] = data[22:24]
+           outputDataOutput['TargetState'] = stateClassification
+           outputDataOutput['MovementTargetDistance'] =  int(data[18:22],16)
+           outputDataOutput['MovementTargetEnergyValue'] = data[22:24]
 
-           outputDataOutput['Detection Distance'] = int(data[30:34],16)
+           outputDataOutput['DetectionDistance'] = int(data[30:34],16)
 
            return outputDataOutput
       
@@ -125,8 +125,7 @@ print(sensorStatus)
 def runningSensor():
     
         sensorStatus = getSensorStatus()
-        if(sensorStatus == 'off'):
-            print("SENSOR OFF")
+
         while sensorStatus == 'on':
             sensorStatus = getSensorStatus()
             if ser.in_waiting > 0:
@@ -168,7 +167,7 @@ def runningSensor():
 
 
 try:
-    while 1 == 1:
+    while True:
         runningSensor()
     
 except KeyboardInterrupt:
