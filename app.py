@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from routes.sensor_routes import sensor_bp
-
+import os
 
 app = Flask(__name__)
 
@@ -12,5 +12,8 @@ app.register_blueprint(sensor_bp)
 def home():
     return jsonify({'HOME': 'HOME TEST'})
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Get the port from the environment or default to 5000
+    app.run(host='0.0.0.0', port=port)
+
