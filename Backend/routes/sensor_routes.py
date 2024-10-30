@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify,request
 from pymongo import MongoClient
 from datetime import datetime
 from bson import ObjectId
+from bson.json_util import dumps
+
 
 sensor_bp = Blueprint('sensor', __name__)
 
@@ -112,3 +114,54 @@ def stopSensor(id):  # Include the 'id' parameter here
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@sensor_bp.route('/allData', methods=['GET'])
+def getData():
+    try:
+        
+        data = list(collection.find())
+        
+        
+        json_data = dumps(data)
+
+        # Return the data as a JSON response
+        return json_data, 200, {'Content-Type': 'application/json'}
+    except Exception as e:
+        # Return the error message as a JSON response with status 500
+        return jsonify({"error": str(e)}), 500
+
+@sensor_bp.route('/dataById/<string:id>', methods =['GET'])
+def dataByRoute(id):
+
+    try:
+            # Define the update data
+           
+
+            # Convert the URL parameter to ObjectId
+        object_id = ObjectId(id)
+
+        data = collection.find_one({"_id": object_id})
+
+        correctedData = dumps(data)
+
+        return correctedData
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@sensor_bp.route('/dataByState/<string:state>', methods = ["GET"])
+def dataByState(state):
+
+    try:
+
+        print(state)
+
+        data = dumps(collection.find({"TargetState":state}))
+
+        return data
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+    

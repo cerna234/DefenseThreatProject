@@ -15,6 +15,7 @@ def detectTargetState(data):
  
    if outPutState != '00' or outPutState!= '' :
       
+       print(outPutState)
        if outPutState == '01':
            stateClassification = "Moving Target"
            
@@ -136,8 +137,8 @@ def runningSensor():
 
 
 
-
                     sendTargetData(detectTargetState(raw_data.hex()))
+                    
                     
                         
                         
