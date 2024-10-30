@@ -93,7 +93,7 @@ def detectTargetState(data):
 
 def sendTargetData(targetData):
     try:
-        url = "http://127.0.0.1:5000/sensor-Data"  # Replace with your API endpoint
+        url = "https://defenseproject-fca5305c6d88.herokuapp.com/sensor-Data"  # Replace with your API endpoint
         response = requests.post(url, json=targetData)
 
 
@@ -104,7 +104,7 @@ def sendTargetData(targetData):
 
 def getSensorStatus():
     try:
-        url = "http://127.0.0.1:5000/status"
+        url = "https://defenseproject-fca5305c6d88.herokuapp.com/status"
         response = requests.get(url)
         if response.status_code == 200:
         # Parse JSON response
