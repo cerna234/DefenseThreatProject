@@ -1,0 +1,12 @@
+
+.SensorStatusContainer{
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.sensorStatus{
+    background-color: orange;
+ 
+}
