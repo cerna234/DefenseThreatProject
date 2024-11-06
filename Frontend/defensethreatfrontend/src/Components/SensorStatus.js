@@ -1,15 +1,66 @@
 import "../Components/SensorStatus.css"
+import React, {useState, useEffect} from 'react';
+import axios from 'axios'
 
-function SensorStatusModule() {
+const SensorStatusModule = () => {
+  const [sensorStatus,setSensorStatus] = useState(null);
+
+  useEffect(() => {
+    
+    fetch('http://127.0.0.1:5000/status')
+    .then(response => {
+      if(!response.ok){
+        throw new Error("ERROR TEST")
+      }
+      return response.json()
+    })
+    .then(data => {
+      setSensorStatus(data.sensorStatus)
+    })
+   
+  })
+
+  
+  const toggleSensor = () => {
+
+   
+
+
+      console.log("TEST")
+    if(sensorStatus === "off"){
+      axios.put('http://127.0.0.1:5000/startSensor/6701c2b770792b8c21e7a55f')
+        .then(response => {
+          console.log(response)
+          setSensorStatus("on")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+    else{
+
+      axios.put('http://127.0.0.1:5000/stopSensor/6701c2b770792b8c21e7a55f')
+        .then(response => {
+          console.log(response)
+          setSensorStatus("off")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+   
+    
+  }
+
   return (
     <div className="SensorStatusContainer">
         <div className="sensorStatus">
-            <h1>STATUS: </h1>
-            <button>BUTTON</button>
+            <h1>STATUS: {sensorStatus} </h1>
+            
 
         </div>
-        <div>
-            
+        <div className="sensorStatusBtnSection">
+          <button onClick={toggleSensor}>Toggle</button>
         </div>
         
       

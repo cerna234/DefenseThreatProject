@@ -8,5 +8,15 @@
 
 .sensorStatus{
     background-color: orange;
- 
+    width: 50%;
+    height: 100%;
+}
+
+.sensorStatusBtnSection{
+    background-color: blue;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
