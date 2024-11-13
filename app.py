@@ -4,7 +4,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app,methods=["GET", "POST", "PUT", "DELETE"])
 # Register the sensor routes
 app.register_blueprint(sensor_bp)
 
