@@ -39,7 +39,7 @@ const SensorStatusModule = () => {
     }
     else{
 
-      axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/6701c2b770792b8c21e7a55f')
+      axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/stopSensor/6701c2b770792b8c21e7a55f')
         .then(response => {
           console.log(response)
           setSensorStatus("off")
