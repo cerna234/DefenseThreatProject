@@ -9,7 +9,7 @@ CORS(app,methods=["GET", "POST", "PUT", "DELETE"])
 app.register_blueprint(sensor_bp)
 
 #Home Route
-@app.route("/", methods=['GET'])
+@app.route("/", methods=["GET", "POST", "PUT", "DELETE"])
 def home():
     return jsonify({'HOME': 'HOME TEST'})
 
