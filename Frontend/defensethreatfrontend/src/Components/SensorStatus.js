@@ -7,7 +7,7 @@ const SensorStatusModule = () => {
 
   useEffect(() => {
     
-    fetch('http://127.0.0.1:5000/status')
+    fetch('https://defenseproject-fca5305c6d88.herokuapp.com/status')
     .then(response => {
       if(!response.ok){
         throw new Error("ERROR TEST")
@@ -26,9 +26,9 @@ const SensorStatusModule = () => {
    
 
 
-      console.log("TEST")
+      console.log(sensorStatus)
     if(sensorStatus === "off"){
-      axios.put('http://127.0.0.1:5000/startSensor/6701c2b770792b8c21e7a55f')
+      axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/startSensor/6701c2b770792b8c21e7a55f')
         .then(response => {
           console.log(response)
           setSensorStatus("on")
@@ -39,7 +39,7 @@ const SensorStatusModule = () => {
     }
     else{
 
-      axios.put('http://127.0.0.1:5000/stopSensor/6701c2b770792b8c21e7a55f')
+      axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/6701c2b770792b8c21e7a55f')
         .then(response => {
           console.log(response)
           setSensorStatus("off")
