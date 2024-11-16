@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const SensorStatusModule = () => {
   const [sensorStatus,setSensorStatus] = useState(null);
+  
 
   useEffect(() => {
     
@@ -30,6 +31,7 @@ const SensorStatusModule = () => {
     if(sensorStatus === "off"){
       axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/startSensor/6701c2b770792b8c21e7a55f')
         .then(response => {
+
           console.log(response)
           setSensorStatus("on")
         })
@@ -55,12 +57,12 @@ const SensorStatusModule = () => {
   return (
     <div className="SensorStatusContainer">
         <div className="sensorStatus">
-            <h1>STATUS: {sensorStatus} </h1>
-            
+            <h1 className="statusLabel">STATUS:  </h1>
+            <div className={"statusBtn" + sensorStatus}></div>
 
         </div>
         <div className="sensorStatusBtnSection">
-          <button onClick={toggleSensor}>Toggle</button>
+          <button className="toggleBtn" onClick={toggleSensor}>Toggle</button>
         </div>
         
       
