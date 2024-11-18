@@ -1,12 +1,13 @@
 
 import SensorStatusModule from "../Components/SensorStatus"
+import SensorDataModule from "../Components/sensorData"
+import "../Pages/Home.css"
 
 function Home() {
   return (
-    <div>
-       
-            
+    <div className="homePageContainer">       
         <SensorStatusModule/>
+        <SensorDataModule/>
     </div>
   );
 }
