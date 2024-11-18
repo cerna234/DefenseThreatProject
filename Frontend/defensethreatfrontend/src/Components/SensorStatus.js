@@ -58,11 +58,16 @@ const SensorStatusModule = () => {
     <div className="SensorStatusContainer">
         <div className="sensorStatus">
             <h1 className="statusLabel">STATUS:  </h1>
-            <div className={"statusBtn" + sensorStatus}></div>
+            <h1>{sensorStatus}</h1>
 
         </div>
         <div className="sensorStatusBtnSection">
-          <button className="toggleBtn" onClick={toggleSensor}>Toggle</button>
+          
+          <div className="toggleBtn" onClick={toggleSensor}>
+            <div className={"onSideBtn" + sensorStatus} >ON</div>
+            <div className={"offSideBtn" + sensorStatus}>OFF</div>
+          </div>
+
         </div>
         
       
