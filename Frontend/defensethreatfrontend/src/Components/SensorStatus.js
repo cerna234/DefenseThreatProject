@@ -58,7 +58,7 @@ const SensorStatusModule = () => {
     <div className="SensorStatusContainer">
         <div className="sensorStatus">
             <h1 className="statusLabel">STATUS:  </h1>
-            <h1>{sensorStatus}</h1>
+            <h1 className="status">{sensorStatus}</h1>
 
         </div>
         <div className="sensorStatusBtnSection">

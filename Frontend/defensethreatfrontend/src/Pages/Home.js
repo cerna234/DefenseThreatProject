@@ -6,6 +6,8 @@ import "../Pages/Home.css"
 function Home() {
   return (
     <div className="homePageContainer">       
+
+        
         <SensorStatusModule/>
         <SensorDataModule/>
     </div>

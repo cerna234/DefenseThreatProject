@@ -1,16 +1,31 @@
 .SensorDataModule{
-    background-color: rgb(10, 43, 78);
-    width: 80%;
+    
+    width: 700px;
     height: 60%;
+   
+    
+}
+
+.sensorModuleTitle{
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.498);
+}
+
+.sensorDataContainer{
+    width: 90%;
+    height: 90%;
     max-height: 500px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.489);
+    border-radius: 5px;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.323);
 }
-
-.sensorDataContainer{
+.sensorData{
+    
     border: 2px solid rgba(255, 255, 255, 0.305);
     border-radius: 10px;
     width: 90%;
@@ -19,7 +34,7 @@
 }
 
 .sensorDataContainer h1{
-    color: rgb(42, 180, 202);
+    color: rgb(242, 253, 255);
     font-size: 15px;
    
 }

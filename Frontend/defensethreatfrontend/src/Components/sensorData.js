@@ -25,31 +25,33 @@ const SensorDataModule = () => {
 
   return (
     <div className="SensorDataModule">
-     
+        <h1 className="sensorModuleTitle"> Detecting...</h1>
         
-        {Object.entries(sensorData).map(([key,value]) => (
+        <div className="sensorDataContainer">
+            <div className="radar-line"></div>
+            {Object.entries(sensorData).map(([key,value]) => (
             
-         
-            <div className="sensorDataContainer" key={key}>
-                  
-                <h1>DETECTION DISTANCE: {value.DetectionDistance}</h1>
-                <h1>MOVEMENT ENERGY VALUE: {value.MovementTargetEnergyValue}</h1>
-                <h1>TARGET DISTANCE{value.StationaryTargetDistance}</h1>
-                <h1>STATIONARY TARGET ENERGY VALUE: {value.StationaryTargetEnergyValue}</h1>
-                <h1>TARGET STATE{value.TargetState}</h1>
-                <h1>DETECTION DISTANCE: {value.DetectionDistance}</h1>
-                
-                
+            
+            <div className="sensorData" key={key}>
+                      
+                    <h1>DETECTION DISTANCE: {value.DetectionDistance}</h1>
+                    <h1>MOVEMENT ENERGY VALUE: {value.MovementTargetEnergyValue}</h1>
+                    <h1>TARGET DISTANCE{value.StationaryTargetDistance}</h1>
+                    <h1>STATIONARY TARGET ENERGY VALUE: {value.StationaryTargetEnergyValue}</h1>
+                    <h1>TARGET STATE{value.TargetState}</h1>
+                    
+                    
+                    
             </div>
-
-            
-            
-        ))}
-
-            
-        <div>
-
+    
+                
+                
+            ))}
         </div>
+        
+
+            
+                
       
         
       
