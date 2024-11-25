@@ -1,5 +1,7 @@
 import "../Components/SensorData.css"
 import React, {useState, useEffect} from 'react';
+import SensorGrid from "../Components/SensorGrid"
+
 
 const SensorDataModule = () => {
   
@@ -25,6 +27,7 @@ const SensorDataModule = () => {
 
   return (
     <div className="SensorDataModule">
+        
         <h1 className="sensorModuleTitle"> Detecting...</h1>
         
         <div className="sensorDataContainer">
@@ -39,6 +42,11 @@ const SensorDataModule = () => {
                     <h1>TARGET DISTANCE{value.StationaryTargetDistance}</h1>
                     <h1>STATIONARY TARGET ENERGY VALUE: {value.StationaryTargetEnergyValue}</h1>
                     <h1>TARGET STATE{value.TargetState}</h1>
+                    <SensorGrid 
+                        StationaryTargetDistance = {value.StationaryTargetDistance}
+                        MovementTargetDistance = {value.MovementTargetDistance}
+                        DetectionDistance = {value.DetectionDistance}
+                    ></SensorGrid>
                     
                     
                     

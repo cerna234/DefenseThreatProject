@@ -1,0 +1,70 @@
+.SensorGrid{
+    width: 200px;
+    height: 200px;
+    background-color: rgba(3, 27, 63, 0.649);
+    background-size: cover;
+    background-position: center;
+   
+}
+
+
+.Radar{
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    top: 2px;
+    left: 2px;
+    
+}
+
+
+.stationaryItem{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(7, 157, 168);
+    border-radius: 20px;
+    top: 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.line{
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    position: relative;
+
+}
+
+.movingOption{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(9, 189, 249);
+    border-radius: 20px;
+    position: relative;
+  
+    box-shadow: 0 0 0 10px rgba(2, 75, 153, 0.848);
+    animation: pulse-animation 1.5s infinite;
+    
+}
+@keyframes pulse-animation {
+    0% {
+      transform: scale(1); /* Start at normal size */
+    }
+    50% {
+      transform: scale(1.2); /* Scale up by 20% */
+    }
+    100% {
+      transform: scale(1); /* Return to normal size */
+    }
+  }
+
+.distance{
+  color: rgb(244, 239, 239);
+  position: relative;
+  left: 30px;
+  font-size: 20px;
+}
