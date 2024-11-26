@@ -3,18 +3,24 @@
     width: 700px;
     height: 60%;
     background-color: rgb(1, 12, 45);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
 }
 
 .sensorModuleTitle{
     font-size: 10px;
     color: rgba(255, 255, 255, 0.498);
+    text-align: left;
+    width: 90%;
 }
 
 .sensorDataContainer{
     width: 90%;
     height: 90%;
-    max-height: 500px;
+    
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -28,13 +34,29 @@
     
     border: 2px solid rgba(255, 255, 255, 0.305);
     border-radius: 10px;
+    height: 100%;
     width: 90%;
     padding: 10px;
     margin: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sensorDataContainer h1{
     color: rgb(242, 253, 255);
     font-size: 15px;
    
+}
+
+.dataContainer{
+    background-color: rgba(5, 22, 48, 0.137);
+    width: 50%;
+    height: 100%;
+}
+
+.timeStamp{
+    color: aqua;
+    font-size: 10px;
 }

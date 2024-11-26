@@ -1,12 +1,16 @@
 .SensorGrid{
     width: 200px;
     height: 200px;
-    background-color: rgba(3, 27, 63, 0.649);
-    background-size: cover;
-    background-position: center;
-   
-}
+  background-color: rgb(1, 21, 32);
 
+
+  
+   background-image: url("https://pluspng.com/img-png/png-focus-coming-soon-175.png");
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+
+}
 
 .Radar{
     width: 20px;

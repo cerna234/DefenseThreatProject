@@ -37,11 +37,10 @@ const SensorDataModule = () => {
             
             <div className="sensorData" key={key}>
                       
-                    <h1>DETECTION DISTANCE: {value.DetectionDistance}</h1>
-                    <h1>MOVEMENT ENERGY VALUE: {value.MovementTargetEnergyValue}</h1>
-                    <h1>TARGET DISTANCE{value.StationaryTargetDistance}</h1>
-                    <h1>STATIONARY TARGET ENERGY VALUE: {value.StationaryTargetEnergyValue}</h1>
-                    <h1>TARGET STATE{value.TargetState}</h1>
+                    <div className="dataContainer">
+                        <h2 className="timeStamp">{value.timestamp.$date}</h2>
+                    
+                    </div>
                     <SensorGrid 
                         StationaryTargetDistance = {value.StationaryTargetDistance}
                         MovementTargetDistance = {value.MovementTargetDistance}

@@ -28,6 +28,7 @@ const SensorGrid = ({StationaryTargetDistance,MovementTargetDistance}) => {
     <div className="SensorGrid">
         
        <div className="Radar"></div>
+     
         
         <div className="stationaryItem" style={{ left: `${gridClassification(StationaryTargetDistance)}px` }} >
           <h2 className="distance">{StationaryTargetDistance}</h2>
