@@ -26,7 +26,7 @@ const SensorDataModule = ({viewAllData}) => {
     },[])
 
     useEffect(() => {
-        fetch("https://defenseproject-fca5305c6d88.herokuapp.com/dataById/671fa9c2ffd909eefa815e4a")
+        fetch("http://127.0.0.1:5000/latestData/")
         .then(response => {
             if(!response.ok){
                 console.log("ERROR")
@@ -73,8 +73,18 @@ const SensorDataModule = ({viewAllData}) => {
 
                             <div className="EnergyContainerAll">
                                     <div className="EnergyContainerAllInner">
-                                        <EnergyVisualComponent EnergyValue={value.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
-                                        <EnergyVisualComponent EnergyValue={value.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                        {value.TargetState == "Moving and Stationary Target Found" || value.TargetState == "Moving Target" ?
+                                            <div>
+                                                <EnergyVisualComponent EnergyValue={value.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
+                                                <EnergyVisualComponent EnergyValue={value.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                            </div>
+
+                                            :
+                                            <div style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}}>
+                                                <EnergyVisualComponent EnergyValue={value.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                            </div>
+                                        }
+                                        
                                     </div>
                                     
                             </div>
@@ -108,14 +118,26 @@ const SensorDataModule = ({viewAllData}) => {
                             StationaryTargetDistance={sensorDataAll.StationaryTargetDistance}
                             MovementTargetDistance = {sensorDataAll.MovementTargetDistance}
                             DetectionDistance = {sensorDataAll.DetectionDistance}
+                            targetState = {sensorDataAll.TargetState}
                             
                             ></SensorGrid>
                         </div>
                         
                         
                         <div className="dataContainer">
-                            <EnergyVisualComponent EnergyValue={sensorDataAll.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
-                            <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue}EnergyValueTitle="Stationary Target"/>
+
+                        {sensorDataAll.TargetState == "Moving and Stationary Target Found" || sensorDataAll.TargetState == "Moving Target" ?
+                                            <div style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}} >
+                                                <EnergyVisualComponent EnergyValue={sensorDataAll.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
+                                                <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                            </div>
+
+                                            :
+                                            <div  style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}}>
+                                                <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                            </div>
+                        }
+                           
                         </div>
 
                         <h2>TIMESTAMP</h2>
