@@ -7,9 +7,20 @@ function Home() {
   return (
     <div className="homePageContainer">       
 
-        
-        <SensorStatusModule/>
-        <SensorDataModule/>
+        <div className="homePageOverLay"></div>
+          <div className="gridSection">
+            <SensorDataModule viewAllData="false"/>
+          </div>
+          <div className="DataSectionModule">
+            
+              <SensorDataModule viewAllData="true"/>
+              <div className="dummyModules">
+                TEST
+              </div>
+            
+          </div>
+     
+       
     </div>
   );
 }

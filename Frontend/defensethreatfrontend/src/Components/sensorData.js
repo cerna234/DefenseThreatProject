@@ -1,13 +1,14 @@
 import "../Components/SensorData.css"
 import React, {useState, useEffect} from 'react';
 import SensorGrid from "../Components/SensorGrid"
+import EnergyVisualComponent from "./EnergyVisualComponent";
 
 
-const SensorDataModule = () => {
+const SensorDataModule = ({viewAllData}) => {
   
     const [sensorData, setSensorData] = useState({})
     const [sensorDataAll, setSensorDataAll] = useState()
-    const [viewAllData,setViewAllData] = useState(false)
+ 
   
 
     useEffect(() => {
@@ -47,27 +48,37 @@ const SensorDataModule = () => {
         
         <h1 className="sensorModuleTitle"> Detecting...</h1>
         
-        {viewAllData ?
+        {viewAllData == "true" ?
         
             sensorDataAll != null ?
-             <div className="sensorDataContainer">
-                <div className="radar-line"></div>
-
-             
+             <div className="sensorDataContainerAll">
+                
+               
                 {Object.entries(sensorData).map(([key,value]) => (
              
              
-                <div className="sensorData" key={key}>
-                        
-                        <div className="dataContainer">
-                            <h2 className="timeStamp">{value.timestamp.$date}</h2>
-                        
+                <div className="sensorDataAll" key={key}>
+                        <div className="sensorDataAllInner">
+                            <div className="dataContainerAll">
+                                <div className="targetData">
+                                
+                                        <h1 className="targetDataValues">Detection Distance: {value.DetectionDistance}</h1>
+                                        <h1 className="targetDataValues">Moving Target Distance: {value.MovementTargetDistance}</h1>
+                                        <h1 className="targetDataValues">Moving Target Energy: {value.MovementTargetEnergyValue}</h1>
+                                        <h1 className="targetDataValues">Stationary Target Distance: {value.StationaryTargetDistance}</h1>
+                                        <h1 className="targetDataValues">Stationary Target Energy: {value.StationaryTargetEnergyValue}</h1>
+                                        
+                                </div>
+                            </div>
+
+                            <div className="EnergyContainerAll">
+                                    <div className="EnergyContainerAllInner">
+                                        <EnergyVisualComponent EnergyValue={value.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
+                                        <EnergyVisualComponent EnergyValue={value.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                    </div>
+                                    
+                            </div>
                         </div>
-                        <SensorGrid 
-                            StationaryTargetDistance = {value.StationaryTargetDistance}
-                            MovementTargetDistance = {value.MovementTargetDistance}
-                            DetectionDistance = {value.DetectionDistance}
-                        ></SensorGrid>
                         
                         
                         
@@ -91,16 +102,23 @@ const SensorDataModule = () => {
              
                 <div className="sensorData" >
                           
-                        <div className="dataContainer">
-                            <h2 className="timeStamp">{sensorDataAll.timestamp.$date}</h2>
-                        
+                        <h2>{sensorDataAll.TargetState}</h2>
+                        <div className="sensorContainer">
+                            <SensorGrid 
+                            StationaryTargetDistance={sensorDataAll.StationaryTargetDistance}
+                            MovementTargetDistance = {sensorDataAll.MovementTargetDistance}
+                            DetectionDistance = {sensorDataAll.DetectionDistance}
+                            
+                            ></SensorGrid>
                         </div>
-                        <SensorGrid 
-                          StationaryTargetDistance={setSensorDataAll.StationaryTargetDistance}
-                          MovementTargetDistance = {sensorDataAll.MovementTargetDistance}
-                          DetectionDistance = {sensorDataAll.DetectionDistance}
-                          
-                        ></SensorGrid>
+                        
+                        
+                        <div className="dataContainer">
+                            <EnergyVisualComponent EnergyValue={sensorDataAll.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
+                            <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue}EnergyValueTitle="Stationary Target"/>
+                        </div>
+
+                        <h2>TIMESTAMP</h2>
                         
                         
                         
@@ -127,8 +145,7 @@ const SensorDataModule = () => {
                 
       
         
-       <button onClick={ () => setViewAllData(false)}>Latest Data</button>
-       <button onClick={ () => setViewAllData(true)}>all data</button>
+       
     </div>
   );
 }

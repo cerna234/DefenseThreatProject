@@ -1,12 +1,20 @@
 .SensorDataModule{
     
-    width: 700px;
-    height: 60%;
-    background-color: rgb(1, 12, 45);
+    width: 90%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 2;
+    
+}
+
+
+.sensorContainer{
+    width: 60%;
+    height: 400px;
     
 }
 
@@ -19,9 +27,9 @@
 
 .sensorDataContainer{
     width: 90%;
-    height: 90%;
+    height: 100%;
     
-    overflow-y: scroll;
+   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,24 +47,118 @@
     padding: 10px;
     margin: 10px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    color: white;
+
 }
 
+.dataContainer{
+    width: 80%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+ 
+
+}
 .sensorDataContainer h1{
     color: rgb(242, 253, 255);
     font-size: 15px;
    
 }
 
-.dataContainer{
-    background-color: rgba(5, 22, 48, 0.137);
-    width: 50%;
-    height: 100%;
-}
+
 
 .timeStamp{
     color: aqua;
     font-size: 10px;
 }
+
+/* ALL section */
+
+
+.sensorDataContainerAll{
+    background-color: rgba(23, 7, 7, 0.274);
+    width: 100%;
+    max-height: 400px;
+    overflow-y: scroll;
+   
+    padding: 20px;
+    border: 2px solid rgb(238, 238, 238);
+   
+}
+
+.sensorDataAll{
+    width: 100%;
+    height: 100%;
+
+  
+    margin-bottom: 10px; 
+    border: 2px solid rgba(244, 244, 244, 0.308);
+    display: flex;
+    
+}
+
+.sensorDataAllInner{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+}
+
+
+.dataContainerAll{
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    
+    
+}
+
+.EnergyContainerAll{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+.EnergyContainerAllInner{
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+.targetDataValues{
+    font-size: 13px;
+    text-align: left;
+    width: 100%;
+    color: white;
+}
+
+
+.targetData{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
