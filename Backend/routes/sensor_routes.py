@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify,request
 from pymongo import MongoClient
 from datetime import datetime
-from bson import ObjectId
+from bson import ObjectId,json_util
 from bson.json_util import dumps
+
 
 
 sensor_bp = Blueprint('sensor', __name__)
@@ -165,3 +166,28 @@ def dataByState(state):
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
     
+@sensor_bp.route('/latestData/', methods=["GET"])
+def latestData():
+    try:
+        # Retrieve the latest data
+        data = collection.find().sort({"timestamp": -1}).limit(1)
+
+        latest_data = list(data)
+
+        if latest_data:
+            # Process each document in the result
+            for item in latest_data:
+                # Convert ObjectId to string
+                item["_id"] = str(item["_id"])
+
+                # Convert timestamp to ISO string if it's a datetime object
+                if "timestamp" in item:
+                    item["timestamp"] = item["timestamp"].isoformat()
+
+            # Return the formatted data as JSON
+            return jsonify(latest_data[0])  # Return only the first document from the list
+        else:
+            return jsonify({"status": "error", "message": "No data found"}), 404
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
