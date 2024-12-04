@@ -191,3 +191,33 @@ def latestData():
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@sensor_bp.route('/historicalEnergyStationary/', methods=["GET"])
+def historicalEnergyDataStationary():
+    try:
+       
+        projection = {"StationaryTargetEnergyValue","timestamp"}
+        data = collection.find({},projection).limit(6)
+
+        correctedData = dumps(data)
+
+        return correctedData
+    
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+    
+
+@sensor_bp.route('/historicalEnergyMoving/', methods=["GET"])
+def historicalEnergyDataMoving():
+    try:
+       
+        projection = {"MovementTargetEnergyValue","timestamp"}
+        data = collection.find({},projection).limit(6)
+
+        correctedData = dumps(data)
+
+        return correctedData
+    
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500

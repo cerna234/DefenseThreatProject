@@ -14,7 +14,69 @@ import {
 
 const HistoricalEnergyComponent = () => {
 
+   const [energyDataStationary, setEnergyDataStationary] = useState([])
+   const [energyDataMoving, setEnergyDataMoving] = useState([])
 
+
+      useEffect(() => {
+        fetch("http://127.0.0.1:5000/historicalEnergyStationary/")
+        .then(response => {
+            
+            return response.json()
+        })
+        .then(data => {
+          
+          const correctedData = []
+
+
+          for(let i = 0; i < data.length; i++){
+         
+         
+            correctedData.push(
+              {
+                "uv" : data[i].StationaryTargetEnergyValue, 
+                //"amount" :data[i].timestamp.$date
+              }
+            )
+           
+
+          }
+
+    
+          setEnergyDataStationary(correctedData)
+        })
+      },[])
+
+      useEffect(() => {
+        fetch("http://127.0.0.1:5000/historicalEnergyMoving")
+        .then(response => {
+            
+            return response.json()
+        })
+        .then(data => {
+          
+          const correctedData = []
+
+
+          for(let i = 0; i < data.length; i++){
+         
+         
+            correctedData.push(
+              {
+                "uv" : data[i].MovementTargetEnergyValue, 
+                //"amount" :data[i].timestamp.$date
+              }
+            )
+           
+
+          }
+
+    
+          setEnergyDataMoving(correctedData)
+        })
+      },[])
+
+    
     const data = [
         
             {
@@ -41,12 +103,12 @@ const HistoricalEnergyComponent = () => {
 
     return (
         <div className='historicalEnergyContainer'>
-            
+    
             <ResponsiveContainer  width="90%" height={100}>
                 <AreaChart
                 width={500}
                 height={400}
-                data={data}
+                data={energyDataStationary}
                 margin={{
                     top: 10,
                     right: 30,
@@ -66,7 +128,7 @@ const HistoricalEnergyComponent = () => {
                 <AreaChart
                 width={500}
                 height={400}
-                data={data}
+                data={energyDataMoving}
                 margin={{
                     top: 10,
                     right: 30,

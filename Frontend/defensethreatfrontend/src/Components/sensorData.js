@@ -107,7 +107,7 @@ const SensorDataModule = ({viewAllData}) => {
              
              
                 <div className="sensorData" >
-                            {console.log(sensorDataAll)} 
+                            
                         <h2>{sensorDataAll.TargetState}</h2>
                         <div className="sensorContainer">
                             <SensorGrid 
