@@ -1,0 +1,23 @@
+
+.historicalEnergyContainer{
+    width: 400px;
+    height: 250px;
+    border: 2px solid rgba(255, 255, 255, 0.466);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.TargetEnergyChart{
+    width: 80%;
+    height: 60%;
+    background-color: rgba(19, 76, 233, 0.151);
+    border: 1px solid rgba(255, 255, 255, 0.322);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+   
+}
+
+

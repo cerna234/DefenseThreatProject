@@ -12,7 +12,7 @@ const SensorDataModule = ({viewAllData}) => {
   
 
     useEffect(() => {
-        fetch("https://defenseproject-fca5305c6d88.herokuapp.com/allData")
+        fetch("http://127.0.0.1:5000/allData")
         .then(response => {
             
             return response.json()

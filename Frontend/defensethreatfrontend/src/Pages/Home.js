@@ -1,6 +1,7 @@
 
 import SensorStatusModule from "../Components/SensorStatus"
 import SensorDataModule from "../Components/sensorData"
+import HistoricalEnergyComponent from "../Components/HistoricalEnergyComponent"
 import "../Pages/Home.css"
 
 function Home() {
@@ -14,8 +15,11 @@ function Home() {
           <div className="DataSectionModule">
             
               <SensorDataModule viewAllData="true"/>
-              <div className="dummyModules">
-                TEST
+              <div className="dataModules">
+                <HistoricalEnergyComponent/>
+                <div className="otherModule">
+            
+                </div>
               </div>
             
           </div>
