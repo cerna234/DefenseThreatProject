@@ -6,7 +6,7 @@ import EnergyVisualComponent from "./EnergyVisualComponent";
 
 const SensorDataModule = ({viewAllData}) => {
   
-    const [sensorData, setSensorData] = useState({})
+    const [sensorData, setSensorData] = useState()
     const [sensorDataAll, setSensorDataAll] = useState()
  
   
@@ -14,9 +14,7 @@ const SensorDataModule = ({viewAllData}) => {
     useEffect(() => {
         fetch("https://defenseproject-fca5305c6d88.herokuapp.com/allData")
         .then(response => {
-            if(!response.ok){
-                console.log("ERROR")
-            }
+            
             return response.json()
         })
         .then(data => {
@@ -28,9 +26,7 @@ const SensorDataModule = ({viewAllData}) => {
     useEffect(() => {
         fetch("http://127.0.0.1:5000/latestData/")
         .then(response => {
-            if(!response.ok){
-                console.log("ERROR")
-            }
+           
             return response.json()
         })
         .then(data => {
@@ -50,7 +46,7 @@ const SensorDataModule = ({viewAllData}) => {
         
         {viewAllData == "true" ?
         
-            sensorDataAll != null ?
+            sensorDataAll ?
              <div className="sensorDataContainerAll">
                 
                
@@ -105,13 +101,13 @@ const SensorDataModule = ({viewAllData}) => {
          
          <div className="sensorDataContainer">
            
-            {sensorData.length > 1 ?
+            {sensorData !== undefined && sensorDataAll !== undefined ?
                 
              
              
              
                 <div className="sensorData" >
-                          
+                            {console.log(sensorDataAll)} 
                         <h2>{sensorDataAll.TargetState}</h2>
                         <div className="sensorContainer">
                             <SensorGrid 
@@ -140,7 +136,7 @@ const SensorDataModule = ({viewAllData}) => {
                            
                         </div>
 
-                        <h2>TIMESTAMP</h2>
+                        <h2>{sensorDataAll.timestamp}</h2>
                         
                         
                         

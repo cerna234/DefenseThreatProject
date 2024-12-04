@@ -81,7 +81,7 @@
 
 
 .sensorDataContainerAll{
-    background-color: rgba(23, 7, 7, 0.274);
+    background-color: rgba(0, 0, 0, 0.274);
     width: 100%;
     max-height: 400px;
     overflow-y: scroll;
