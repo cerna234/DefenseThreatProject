@@ -6,6 +6,7 @@
 
  
    background-image: url("https://pluspng.com/img-png/png-focus-coming-soon-175.png");
+   
    background-size: cover;
    background-repeat: no-repeat;
    background-position: center;
@@ -14,12 +15,15 @@
 }
 
 .Radar{
-    width: 20px;
-    height: 20px;
-    background-color: green;
+    width: 40px;
+    height: 40px;
+   
     top: 2px;
     left: 2px;
-    
+    background-image: url("https://th.bing.com/th/id/R.f176c9bfdc30d4373945067a4993e4a2?rik=bxHtiPf8ffDsvg&riu=http%3a%2f%2ffarm8.staticflickr.com%2f7127%2f7632747870_b88458bc41_o.png&ehk=vb2JwbDIGkUEW9mN9itC1t7dNpAJ8U5T14uQTj9NOKw%3d&risl=&pid=ImgRaw&r=0");
+    background-size: cover;
+    background-position: center;
+
 }
 
 
@@ -32,7 +36,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    
+    transition: 1s ease-in-out;
 }
 
 
@@ -53,6 +57,7 @@
   
     box-shadow: 0 0 0 10px rgba(2, 75, 153, 0.848);
     animation: pulse-animation 1.5s infinite;
+    transition: 1s ease-in-out;
     
 }
 @keyframes pulse-animation {

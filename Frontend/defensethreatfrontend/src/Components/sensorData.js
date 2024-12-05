@@ -10,31 +10,42 @@ const SensorDataModule = ({viewAllData}) => {
     const [sensorDataAll, setSensorDataAll] = useState()
  
   
-
+   
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/allData")
-        .then(response => {
-            
-            return response.json()
-        })
-        .then(data => {
-            
-            setSensorData(data)
-        })
-    },[])
+        const fetchAllData = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:5000/allData");
+                const data = await response.json();
+                setSensorData(data);
+            } catch (error) {
+                console.error("Error fetching allData:", error);
+            }
+        };
 
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/latestData/")
-        .then(response => {
-           
-            return response.json()
-        })
-        .then(data => {
-            
-            setSensorDataAll(data)
-        })
-    },[])
+        const fetchLatestData = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:5000/latestData/");
+                const data = await response.json();
+                setSensorDataAll(data);
+            } catch (error) {
+                console.error("Error fetching latestData:", error);
+            }
+        };
 
+        // Fetch data immediately and set up an interval
+        
+        fetchAllData();
+        fetchLatestData();
+        const interval = setInterval(() => {
+            console.log("INTERVAL")
+            fetchAllData();
+            fetchLatestData();
+        }, 10000);
+
+        // Cleanup interval on unmount
+        return () => clearInterval(interval);
+    }, []);
+    
     
  
 

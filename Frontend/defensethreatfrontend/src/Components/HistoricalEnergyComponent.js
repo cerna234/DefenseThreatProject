@@ -18,63 +18,45 @@ const HistoricalEnergyComponent = () => {
    const [energyDataMoving, setEnergyDataMoving] = useState([])
 
 
-      useEffect(() => {
-        fetch("http://127.0.0.1:5000/historicalEnergyStationary/")
-        .then(response => {
-            
-            return response.json()
-        })
-        .then(data => {
-          
-          const correctedData = []
+   useEffect(() => {
+    const fetchEnergyData = async (url, setData, dataKey) => {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
 
+            // Process data into the desired format
+            const correctedData = data.map(item => ({
+                uv: item[dataKey],
+                // Uncomment and adjust the following if timestamps are needed
+                // amount: item.timestamp.$date
+            }));
 
-          for(let i = 0; i < data.length; i++){
-         
-         
-            correctedData.push(
-              {
-                "uv" : data[i].StationaryTargetEnergyValue, 
-                //"amount" :data[i].timestamp.$date
-              }
-            )
-           
+            setData(correctedData);
+        } catch (error) {
+            console.error(`Error fetching data from ${url}:`, error);
+        }
+    };
 
-          }
+    const fetchAllEnergyData = () => {
+        fetchEnergyData(
+            "http://127.0.0.1:5000/historicalEnergyStationary/",
+            setEnergyDataStationary,
+            "StationaryTargetEnergyValue"
+        );
+        fetchEnergyData(
+            "http://127.0.0.1:5000/historicalEnergyMoving/",
+            setEnergyDataMoving,
+            "MovementTargetEnergyValue"
+        );
+    };
 
-    
-          setEnergyDataStationary(correctedData)
-        })
-      },[])
+    // Fetch data immediately and then every 10 seconds
+    fetchAllEnergyData();
+    const interval = setInterval(fetchAllEnergyData, 10000);
 
-      useEffect(() => {
-        fetch("http://127.0.0.1:5000/historicalEnergyMoving")
-        .then(response => {
-            
-            return response.json()
-        })
-        .then(data => {
-          
-          const correctedData = []
-
-
-          for(let i = 0; i < data.length; i++){
-         
-         
-            correctedData.push(
-              {
-                "uv" : data[i].MovementTargetEnergyValue, 
-                //"amount" :data[i].timestamp.$date
-              }
-            )
-           
-
-          }
-
-    
-          setEnergyDataMoving(correctedData)
-        })
-      },[])
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+}, []);
 
     
     const data = [
@@ -103,46 +85,49 @@ const HistoricalEnergyComponent = () => {
 
     return (
         <div className='historicalEnergyContainer'>
-    
-            <ResponsiveContainer  width="90%" height={100}>
-                <AreaChart
-                width={500}
-                height={400}
-                data={energyDataStationary}
-                margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                }}
-                >
-                <CartesianGrid stroke="rgba(255, 255, 255, 0.2)"  />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="uv" stroke="#00004B" fill="#19FEF9" />
-                </AreaChart>
-            </ResponsiveContainer>
+            <h2 className='historicalEnergyTitle'>Historical Energy Data</h2>
+            <div className='historicalEnergyInner'>
+              <ResponsiveContainer  width="90%" height={100}>
+                  <AreaChart
+                  width={500}
+                  height={400}
+                  data={energyDataStationary}
+                  margin={{
+                      top: 10,
+                      right: 30,
+                      left: 0,
+                      bottom: 0,
+                  }}
+                  >
+                  <CartesianGrid stroke="rgba(255, 255, 255, 0.2)"  />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="uv" stroke="#00004B" fill="#19FEF9" />
+                  </AreaChart>
+              </ResponsiveContainer>
 
-            <ResponsiveContainer width="90%" height={100}>
-                <AreaChart
-                width={500}
-                height={400}
-                data={energyDataMoving}
-                margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                }}
-                >
-                <CartesianGrid stroke="rgba(255, 255, 255, 0.2)"  />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="uv" stroke="#00004B" fill="#19FEF9" />
-                </AreaChart>
-            </ResponsiveContainer>
+              <ResponsiveContainer width="90%" height={100}>
+                  <AreaChart
+                  width={500}
+                  height={400}
+                  data={energyDataMoving}
+                  margin={{
+                      top: 10,
+                      right: 30,
+                      left: 0,
+                      bottom: 0,
+                  }}
+                  >
+                  <CartesianGrid stroke="rgba(255, 255, 255, 0.2)"  />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="uv" stroke="#00004B" fill="#19FEF9" />
+                  </AreaChart>
+              </ResponsiveContainer>
+            
+            </div>
             
 
            
