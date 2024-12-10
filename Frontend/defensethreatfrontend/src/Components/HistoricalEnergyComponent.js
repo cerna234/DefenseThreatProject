@@ -39,12 +39,12 @@ const HistoricalEnergyComponent = () => {
 
     const fetchAllEnergyData = () => {
         fetchEnergyData(
-            "http://127.0.0.1:5000/historicalEnergyStationary/",
+            "https://defenseproject-fca5305c6d88.herokuapp.com/historicalEnergyStationary/",
             setEnergyDataStationary,
             "StationaryTargetEnergyValue"
         );
         fetchEnergyData(
-            "http://127.0.0.1:5000/historicalEnergyMoving/",
+            "https://defenseproject-fca5305c6d88.herokuapp.com/historicalEnergyMoving/",
             setEnergyDataMoving,
             "MovementTargetEnergyValue"
         );

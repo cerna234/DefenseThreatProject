@@ -14,7 +14,7 @@ const SensorDataModule = ({viewAllData}) => {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:5000/allData");
+                const response = await fetch("https://defenseproject-fca5305c6d88.herokuapp.com/allData");
                 const data = await response.json();
                 setSensorData(data);
             } catch (error) {
@@ -24,7 +24,7 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchLatestData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:5000/latestData/");
+                const response = await fetch("https://defenseproject-fca5305c6d88.herokuapp.com/latestData/");
                 const data = await response.json();
                 setSensorDataAll(data);
             } catch (error) {
