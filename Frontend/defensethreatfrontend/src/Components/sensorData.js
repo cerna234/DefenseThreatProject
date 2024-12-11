@@ -57,7 +57,7 @@ const SensorDataModule = ({viewAllData}) => {
         
         {viewAllData == "true" ?
         
-            sensorDataAll ?
+        sensorData !== undefined && sensorDataAll !== undefined ?
              <div className="sensorDataContainerAll">
                 
                

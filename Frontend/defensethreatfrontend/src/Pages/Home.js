@@ -17,9 +17,8 @@ function Home() {
               <SensorDataModule viewAllData="true"/>
               <div className="dataModules">
                 <HistoricalEnergyComponent/>
-                <div className="otherModule">
-            
-                </div>
+                <SensorStatusModule/>
+                
               </div>
             
           </div>

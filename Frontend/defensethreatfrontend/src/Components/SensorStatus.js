@@ -56,19 +56,40 @@ const SensorStatusModule = () => {
 
   return (
     <div className="SensorStatusContainer">
-        <div className="sensorStatus">
-            <h1 className="statusLabel">STATUS:  </h1>
-            <h1 className="status">{sensorStatus}</h1>
+        <h2 className='SensorStatusTitle'>Sensor Status</h2>
+        <div className="SensorStatusContainerInner">
+          <div className="toggleSection">
+            <div className="sensorStatus">
+                <h1 className="statusLabel">STATUS:  </h1>
+                <h1 className="status">{sensorStatus}</h1>
 
-        </div>
-        <div className="sensorStatusBtnSection">
-          
-          <div className="toggleBtn" onClick={toggleSensor}>
-            <div className={"onSideBtn" + sensorStatus} >ON</div>
-            <div className={"offSideBtn" + sensorStatus}>OFF</div>
+            </div>
+            <div className="sensorStatusBtnSection">
+              
+              <div className="toggleBtn" onClick={toggleSensor}>
+                <div className={"onSideBtn" + sensorStatus} >ON</div>
+                <div className={"offSideBtn" + sensorStatus}>OFF</div>
+              </div>
+
+            </div>
           </div>
+          <div className="radarImageContainer">
+              <div className="sensorBase"></div>
+            {sensorStatus == "on" ?
 
+              
+                <div className="sensorDishOn"></div>
+               :
+                <div className="sensorDishOff"></div>
+
+            }
+         
+           
+            
+          </div>
         </div>
+       
+       
         
       
     </div>
