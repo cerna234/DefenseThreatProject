@@ -63,6 +63,8 @@ def detectTargetState(data):
 
            outputDataOutput['DetectionDistance'] = int(data[30:34],16)
 
+           #ADD IF STATEMENT TO CLASSIFY WHEN STATIONARY TARGET DISTANCE & ENERGY VALUE == MOVING TARGET AND ENERGY VALUE then assume its the same object so classify it as just 1 moving object
+
            return outputDataOutput
       
            #print("STATIONARY TARGET DATA:")
