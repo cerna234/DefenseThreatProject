@@ -2,7 +2,7 @@ import "../Components/SensorData.css"
 import React, {useState, useEffect} from 'react';
 import SensorGrid from "../Components/SensorGrid"
 import EnergyVisualComponent from "./EnergyVisualComponent";
-
+import { Circles } from "react-loader-spinner";
 
 const SensorDataModule = ({viewAllData}) => {
   
@@ -12,6 +12,8 @@ const SensorDataModule = ({viewAllData}) => {
   
    
     useEffect(() => {
+        
+
         const fetchAllData = async () => {
             try {
                 const response = await fetch("https://defenseproject-fca5305c6d88.herokuapp.com/allData");
@@ -106,7 +108,15 @@ const SensorDataModule = ({viewAllData}) => {
                     ))}
             </div> 
             :
-            <div>TEST</div>
+            <div className="loadingSpinnerContainer">
+                <Circles 
+                    height="80" 
+                    width="80" 
+                    color="#FCFFFC" 
+                    ariaLabel="loading-indicator" 
+                />
+            </div>
+            
          :
 
          
@@ -155,8 +165,13 @@ const SensorDataModule = ({viewAllData}) => {
 
                 :
 
-                <div>
-                    <h2>TESTTTTTTTT</h2>
+                <div className="loadingSpinnerContainer">
+                    <Circles 
+                        height="80" 
+                        width="80" 
+                        color="#FCFFFC" 
+                        ariaLabel="loading-indicator" 
+                    />
                 </div>
                 
             }
