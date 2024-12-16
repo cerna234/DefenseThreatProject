@@ -16,7 +16,7 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchAllData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:5000/allData");
+                const response = await fetch("http://127.0.0.1:5000/threatClassification/allData");
                 const data = await response.json();
                 setSensorData(data);
             } catch (error) {
@@ -26,9 +26,9 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchLatestData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:5000/latestData");
+                const response = await fetch("http://127.0.0.1:5000/threatClassification/latestData");
                 const data = await response.json();
-                setSensorDataAll(data);
+                setSensorDataAll(data[0]);
             } catch (error) {
                 console.error("Error fetching latestData:", error);
             }
@@ -64,7 +64,7 @@ const SensorDataModule = ({viewAllData}) => {
                 
                
                 {Object.entries(sensorData).map(([key,value]) => (
-             
+                    
              
                 <div className="sensorDataAll" key={key}>
                         <div className="sensorDataAllInner">
@@ -130,7 +130,7 @@ const SensorDataModule = ({viewAllData}) => {
                 <div className="sensorData" >
                         <div className="targetThreatLevelContainer">
                             <p className="targetThreatLevel">{sensorDataAll.ThreatStatus}</p> 
-                            {console.log(sensorDataAll)} 
+                            {console.log(sensorDataAll.TargetState)} 
                         </div>
                         
                         <h2>{sensorDataAll.TargetState}</h2>
