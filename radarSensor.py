@@ -13,9 +13,18 @@ def detectTargetState(data):
    outputDataOutput = {}
    print("-----------------------------------------------")
  
-   if outPutState != '00' or outPutState!= '' :
+   if outPutState!= '' :
       
-       print(outPutState)
+       if(outPutState == '00'):
+           print("NO ONE FOUND")  
+
+           stateClassification = "No Target"
+        
+           print(stateClassification)
+           outputDataOutput['TargetState'] = stateClassification
+          
+
+           return outputDataOutput
        if outPutState == '01':
            stateClassification = "Moving Target"
            
@@ -90,7 +99,6 @@ def detectTargetState(data):
        
   
 
-  
 
 
 

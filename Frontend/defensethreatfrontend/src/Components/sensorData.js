@@ -16,7 +16,7 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchAllData = async () => {
             try {
-                const response = await fetch("https://defenseproject-fca5305c6d88.herokuapp.com/allData");
+                const response = await fetch("http://127.0.0.1:5000/allData");
                 const data = await response.json();
                 setSensorData(data);
             } catch (error) {
@@ -26,7 +26,7 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchLatestData = async () => {
             try {
-                const response = await fetch("https://defenseproject-fca5305c6d88.herokuapp.com/latestData/");
+                const response = await fetch("http://127.0.0.1:5000/latestData");
                 const data = await response.json();
                 setSensorDataAll(data);
             } catch (error) {
@@ -128,8 +128,13 @@ const SensorDataModule = ({viewAllData}) => {
              
              
                 <div className="sensorData" >
-                            
+                        <div className="targetThreatLevelContainer">
+                            <p className="targetThreatLevel">{sensorDataAll.ThreatStatus}</p> 
+                            {console.log(sensorDataAll)} 
+                        </div>
+                        
                         <h2>{sensorDataAll.TargetState}</h2>
+                        
                         <div className="sensorContainer">
                             <SensorGrid 
                             StationaryTargetDistance={sensorDataAll.StationaryTargetDistance}
@@ -147,11 +152,27 @@ const SensorDataModule = ({viewAllData}) => {
                                             <div style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}} >
                                                 <EnergyVisualComponent EnergyValue={sensorDataAll.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
                                                 <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                              
                                             </div>
 
                                             :
+                                            
                                             <div  style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}}>
-                                                <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                                {sensorDataAll.TargetState == "No Target" ? 
+                                                    <div>
+                                                        <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                                    
+                                                    </div>
+
+                                                    : 
+
+                                                    <div>
+                                                        <h1 style={{color:"white"}}>TEST</h1>
+                                                        {console.log(sensorDataAll)}
+                                                        <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
+                                                    </div>
+                                                }
+                                               
                                             </div>
                         }
                            

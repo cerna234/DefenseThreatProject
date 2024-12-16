@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from datetime import datetime
 from bson import ObjectId,json_util
 from bson.json_util import dumps
+import requests
 
 
 threat_bp = Blueprint('threatAnalysis', __name__)
@@ -19,50 +20,45 @@ collection = db['SensorData']  # Your collection name
 statusTable = db['sensorStatus']
 
 
-@threat_bp.route('/threatClassification', methods=['GET'])
-def threatClassification():
+@threat_bp.route('/threatClassification/<string:route>', methods=['GET'])
+def threatClassification(route):
     try:
-        
-        data = list(collection.find())
-        
+        base_url = "http://127.0.0.1:5000"  # Update with your server's base URL
+        response = requests.get(f"{base_url}/{route}")
+
+        # Ensure the request was successful
+        if response.status_code != 200:
+            return jsonify({"error": f"Failed to fetch data: {response.text}"}), response.status_code
+
+        # Parse the JSON response
+        data = response.json()
+
+        # Check if the response is a list or a single object
+        if isinstance(data, dict):
+            # Wrap single object in a list to process uniformly
+            data = [data]
+
         for value in data:
-
             if value['TargetState'] == "Moving and Stationary Target Found":
-            
-               value['ThreatStatus'] = 'Threat'
-        
+                value['ThreatStatus'] = 'Threat'
 
-            
-            if value['TargetState'] == "Stationary Target":
-
+            elif value['TargetState'] == "Stationary Target":
                 if value['StationaryTargetDistance'] < 15000:
-
-                    if int(value['StationaryTargetEnergy Value']) < 45:
+                    if int(value['StationaryTargetEnergy Value']) < 45:  # Corrected field name
                         value['ThreatStatus'] = 'Threat'
                     else:
-                        value['ThreatStatus'] = 'Crtitical Threat'
-                    
+                        value['ThreatStatus'] = 'Critical Threat'
 
-                elif value['StationaryTargetDistance']  < 25000:
+                elif value['StationaryTargetDistance'] < 25000:
                     value['ThreatStatus'] = 'Threat'
 
-                elif value['StationaryTargetDistance']  < 35000:
+                elif value['StationaryTargetDistance'] < 35000:
                     value['ThreatStatus'] = 'Possible Threat'
                 else:
                     value['ThreatStatus'] = 'No Threat'
-                        
-              
-         
 
-            
+        # Return the modified data as a JSON response
+        return jsonify(data), 200
 
-
-        json_data = dumps(data)
-
-     
-
-        # Return the data as a JSON response
-        return json_data, 200, {'Content-Type': 'application/json'}
     except Exception as e:
-        # Return the error message as a JSON response with status 500
         return jsonify({"error": str(e)}), 500
