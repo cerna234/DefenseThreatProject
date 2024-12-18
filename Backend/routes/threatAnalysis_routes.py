@@ -38,9 +38,54 @@ def threatClassification(route):
             # Wrap single object in a list to process uniformly
             data = [data]
 
+       
         for value in data:
+         
             if value['TargetState'] == "Moving and Stationary Target Found":
-                value['ThreatStatus'] = 'Threat'
+                movingThreat = ""
+                stationaryThreat = ""
+
+                if value['StationaryTargetDistance'] < 15000:
+                    if int(value['StationaryTargetEnergyValue']) < 45:  # Corrected field name
+                        stationaryThreat = 'Threat'
+                    else:
+                        stationaryThreat = 'Critical Threat'
+
+                elif value['StationaryTargetDistance'] < 25000:
+                    stationaryThreat = 'Threat'
+
+                elif value['StationaryTargetDistance'] < 35000:
+                    stationaryThreat = 'Possible Threat'
+                else:
+                    stationaryThreat = 'No Threat'
+
+
+                if value['MovementTargetDistance'] < 15000:
+                    if int(value['MovementTargetEnergyValue']) < 45:  # Corrected field name
+                        movingThreat = 'Threat'
+                    else:
+                        movingThreat = 'Critical Threat'
+
+                elif value['MovementTargetDistance'] < 25000:
+                    movingThreat = 'Threat'
+
+                elif value['MovementTargetDistance'] < 35000:
+                    movingThreat = 'Possible Threat'
+                else:
+                    movingThreat = 'No Threat'
+
+                if 'Critical Threat' in [stationaryThreat, movingThreat]:
+                    value['ThreatStatus'] = 'Critical Threat'
+                elif 'Threat' in [stationaryThreat, movingThreat]:
+                    value['ThreatStatus'] = 'Threat'
+                elif 'Possible Threat' in [stationaryThreat, movingThreat]:
+                    value['ThreatStatus'] = 'Possible Threat'
+                else:
+                    value['ThreatStatus'] = 'No Threat'
+
+
+                
+       
 
             elif value['TargetState'] == "Stationary Target":
                 if value['StationaryTargetDistance'] < 15000:
@@ -56,9 +101,9 @@ def threatClassification(route):
                     value['ThreatStatus'] = 'Possible Threat'
                 else:
                     value['ThreatStatus'] = 'No Threat'
-
+       
         # Return the modified data as a JSON response
         return jsonify(data), 200
-
+        
     except Exception as e:
         return jsonify({"error": str(e)}), 500

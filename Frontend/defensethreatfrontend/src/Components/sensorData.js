@@ -34,12 +34,11 @@ const SensorDataModule = ({viewAllData}) => {
             }
         };
 
-        // Fetch data immediately and set up an interval
         
         fetchAllData();
         fetchLatestData();
         const interval = setInterval(() => {
-            console.log("INTERVAL")
+            console.log("TEST")
             fetchAllData();
             fetchLatestData();
         }, 10000);
@@ -129,11 +128,31 @@ const SensorDataModule = ({viewAllData}) => {
              
                 <div className="sensorData" >
                         <div className="targetThreatLevelContainer">
-                            <p className="targetThreatLevel">{sensorDataAll.ThreatStatus}</p> 
-                            {console.log(sensorDataAll.TargetState)} 
+                            <p 
+                            
+                                className="targetThreatLevel" 
+                                style={{
+                                    border: sensorDataAll.ThreatStatus === "Critical Threat"
+                                      ? "2px solid red"
+                                      : sensorDataAll.ThreatStatus === "Threat"
+                                      ? "2px solid orange"
+                                      : sensorDataAll.ThreatStatus === "Possible Threat" 
+                                      ? "2px solid green": "2px solid lime", 
+
+                                      color: sensorDataAll.ThreatStatus === "Critical Threat"
+                                      ? "red"
+                                      : sensorDataAll.ThreatStatus === "Threat"
+                                      ? "orange"
+                                      : sensorDataAll.ThreatStatus === "Possible Threat" 
+                                      ? "green": "lime", 
+                                  }}
+                            >
+                                {sensorDataAll.ThreatStatus}
+                            </p> 
+                         
                         </div>
                         
-                        <h2>{sensorDataAll.TargetState}</h2>
+                        <h2 className="targetStateTitle">{sensorDataAll.TargetState}</h2>
                         
                         <div className="sensorContainer">
                             <SensorGrid 
