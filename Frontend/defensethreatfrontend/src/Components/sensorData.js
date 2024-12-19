@@ -8,6 +8,7 @@ const SensorDataModule = ({viewAllData}) => {
   
     const [sensorData, setSensorData] = useState()
     const [sensorDataAll, setSensorDataAll] = useState()
+    const [sensorStatus, setSensorStatus] = useState()
  
   
    
@@ -34,17 +35,49 @@ const SensorDataModule = ({viewAllData}) => {
             }
         };
 
+        const fetchStatus = async () => {
+            try {
+                
+                const response = await fetch("http://127.0.0.1:5000/status");
+                const data = await response.json();
+                setSensorStatus(data.sensorStatus);
+                console.log(data.sensorStatus)
+             
+            }
+            catch(error){
+                console.error("Error fetching status:", error);
+            }
+        }
+
         
-        fetchAllData();
-        fetchLatestData();
-        const interval = setInterval(() => {
-            console.log("TEST")
             fetchAllData();
             fetchLatestData();
-        }, 10000);
+            fetchStatus()
 
-        // Cleanup interval on unmount
-        return () => clearInterval(interval);
+     
+            const interval = setInterval(() => {
+                fetchStatus();
+                if(sensorStatus!= undefined){
+                    if(sensorStatus == "on"){
+                        fetchAllData();
+                        fetchLatestData();
+                    }
+                    else{
+                        console.log("CURRENBT SENSOR STATUS" + sensorStatus)
+                        
+                    }
+                }
+                
+                
+            }, 10000);
+    
+            // Cleanup interval on unmount
+            if(sensorStatus == "on"){
+                return () => clearInterval(interval);
+            }
+         
+        
+        
     }, []);
     
     
