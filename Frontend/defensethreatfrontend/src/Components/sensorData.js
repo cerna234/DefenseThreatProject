@@ -30,6 +30,7 @@ const SensorDataModule = ({viewAllData}) => {
                 const response = await fetch("http://127.0.0.1:5000/threatClassification/latestData");
                 const data = await response.json();
                 setSensorDataAll(data[0]);
+               
             } catch (error) {
                 console.error("Error fetching latestData:", error);
             }
@@ -61,6 +62,8 @@ const SensorDataModule = ({viewAllData}) => {
                     if(sensorStatus == "on"){
                         fetchAllData();
                         fetchLatestData();
+                        console.log(sensorData)
+                        console.log(sensorDataAll)
                     }
                     else{
                         console.log("CURRENBT SENSOR STATUS" + sensorStatus)
@@ -69,12 +72,12 @@ const SensorDataModule = ({viewAllData}) => {
                 }
                 
                 
-            }, 10000);
+            }, 2000);
     
             // Cleanup interval on unmount
-            if(sensorStatus == "on"){
+           
                 return () => clearInterval(interval);
-            }
+            
          
         
         
@@ -99,6 +102,7 @@ const SensorDataModule = ({viewAllData}) => {
                     
              
                 <div className="sensorDataAll" key={key}>
+                   
                         <div className="sensorDataAllInner">
                             <div className="dataContainerAll">
                                 <div className="targetData">
@@ -159,8 +163,14 @@ const SensorDataModule = ({viewAllData}) => {
              
              
              
-                <div className="sensorData" >
-                        <div className="targetThreatLevelContainer">
+                <div className="sensorData"  >
+                     <div className="sensorOffOverlay"
+                        style={{opacity: sensorStatus == "on" ? "0%" : "100%"}}
+                     >
+                        
+                        <h2>--- RADAR OFF ---</h2>
+                     </div>
+                        <div className="targetThreatLevelContainer" >
                             <p 
                             
                                 className="targetThreatLevel" 
@@ -180,7 +190,7 @@ const SensorDataModule = ({viewAllData}) => {
                                       ? "green": "lime", 
                                   }}
                             >
-                                {sensorDataAll.ThreatStatus}
+                                {sensorDataAll.ThreatStatus} 
                             </p> 
                          
                         </div>
@@ -193,7 +203,8 @@ const SensorDataModule = ({viewAllData}) => {
                             MovementTargetDistance = {sensorDataAll.MovementTargetDistance}
                             DetectionDistance = {sensorDataAll.DetectionDistance}
                             targetState = {sensorDataAll.TargetState}
-                            
+                            style={{animation: "none !important"}}
+                            sensorStatus={sensorStatus}
                             ></SensorGrid>
                         </div>
                         
@@ -212,6 +223,7 @@ const SensorDataModule = ({viewAllData}) => {
                                             <div  style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}}>
                                                 {sensorDataAll.TargetState == "No Target" ? 
                                                     <div>
+                                                        {console.log("IT")}
                                                         <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
                                                     
                                                     </div>
@@ -219,8 +231,7 @@ const SensorDataModule = ({viewAllData}) => {
                                                     : 
 
                                                     <div>
-                                                        <h1 style={{color:"white"}}>TEST</h1>
-                                                        {console.log(sensorDataAll)}
+                                                       
                                                         <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
                                                     </div>
                                                 }

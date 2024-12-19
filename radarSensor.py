@@ -17,6 +17,7 @@ def detectTargetState(data):
       
        if(outPutState == '00'):
            print("NO ONE FOUND")  
+           print(outPutState)
 
            stateClassification = "No Target"
         

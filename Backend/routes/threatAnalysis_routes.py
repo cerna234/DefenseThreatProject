@@ -101,7 +101,9 @@ def threatClassification(route):
                     value['ThreatStatus'] = 'Possible Threat'
                 else:
                     value['ThreatStatus'] = 'No Threat'
-       
+
+            elif value['TargetState'] == "No Target":
+                value['ThreatStatus'] = "No Threat"
         # Return the modified data as a JSON response
         return jsonify(data), 200
         
