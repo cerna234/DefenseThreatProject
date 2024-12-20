@@ -1,0 +1,87 @@
+.SensorGrid{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(1, 21, 32, 0);
+
+
+ 
+   background-image: url("https://pluspng.com/img-png/png-focus-coming-soon-175.png");
+   
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   transition: 1s ease-in-out;
+
+}
+
+.Radar{
+    width: 40px;
+    height: 40px;
+   
+    top: 2px;
+    left: 2px;
+    background-image: url("https://th.bing.com/th/id/R.f176c9bfdc30d4373945067a4993e4a2?rik=bxHtiPf8ffDsvg&riu=http%3a%2f%2ffarm8.staticflickr.com%2f7127%2f7632747870_b88458bc41_o.png&ehk=vb2JwbDIGkUEW9mN9itC1t7dNpAJ8U5T14uQTj9NOKw%3d&risl=&pid=ImgRaw&r=0");
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.stationaryItem{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(7, 157, 168);
+    border-radius: 20px;
+    top: 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: 1s ease-in-out;
+}
+
+
+.line{
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    position: relative;
+
+}
+
+.movingOptionOn,.movingOptionOff{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(9, 189, 249);
+    border-radius: 20px;
+    position: relative;
+  
+    box-shadow: 0 0 0 10px rgba(2, 75, 153, 0.848);
+    animation: pulse-animation 1.5s infinite;
+
+    transition: 1s ease-in-out;
+    
+}
+
+.movingOptionOff{
+  opacity: 10%;
+  animation: none;
+  
+}
+@keyframes pulse-animation {
+    0% {
+      transform: scale(1); /* Start at normal size */
+    }
+    50% {
+      transform: scale(1.2); /* Scale up by 20% */
+    }
+    100% {
+      transform: scale(1); /* Return to normal size */
+    }
+  }
+
+.distance{
+  color: rgb(244, 239, 239);
+  position: relative;
+  left: 30px;
+  font-size: 20px;
+}
