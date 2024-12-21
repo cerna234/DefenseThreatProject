@@ -1,0 +1,173 @@
+
+.SensorStatusContainer{
+  
+    width: 400px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    z-index: 4;
+  
+  
+}
+
+
+.SensorStatusTitle{
+
+    color: rgba(255, 255, 255, 0.603);
+    font-size: 8px;
+    animation: fadeInOut 2s infinite;
+
+}
+
+.SensorStatusContainerInner{
+    width: 95%;
+    height: 95%;
+    border: 2px solid rgba(255, 255, 255, 0.466);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.toggleSection{
+ 
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+
+.statusLabel, .status{
+    font-size: 30px;
+}
+
+.sensorStatus{
+    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  
+    
+}
+
+
+
+.sensorStatusBtnSection{
+  
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.toggleBtn{
+    
+    display: flex;
+    width: 60px;
+    height: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 5px;
+    cursor: pointer;
+
+}
+
+.onSideBtnon ,.onSideBtnoff, .offSideBtnon, .offSideBtnoff{
+    width: 50%;
+    height: 100%;
+    background-color: rgb(122, 122, 122);
+    border-radius: 5px 0px 0px 5px;
+    color: green;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+    padding: 10px 20px;
+    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+.onSideBtnoff{
+   
+    background-color: rgb(75, 75, 75);
+    color: rgba(0, 0, 0, 0.24);
+    border-radius: 5px 0px 0px 5px;
+ 
+}
+
+.offSideBtnon{
+    
+    background-color: rgb(75, 75, 75);
+    color: rgba(0, 0, 0, 0.288);
+    border-radius: 0px 5px 5px 0px;
+    
+}
+.offSideBtnoff{
+ 
+    background-color: rgb(92, 92, 92);
+    border-radius: 0px 5px 5px 0px;
+    color: red;
+}
+
+
+
+.radarImageContainer{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+
+.sensorBase{
+    width: 70%;
+    height: 70%;
+  
+    position: absolute;
+    background-image: url("../Images/radarSensorBase.png");
+    background-size: cover;
+    background-position: center;
+}
+
+
+.sensorDishOn,.sensorDishOff{
+    width: 70%;
+    height: 70%;
+    background-image: url("../Images/radarSensorDish.png");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    transition: 1s ease-in-out;
+}
+.sensorDishOn{
+    transform: rotate(45deg);
+}
+
+.sensorImageOn, .sensorImageOff{
+    width: 70%;
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+    transition:3s ease-in-out;
+}
+
+.sensorImageOn{
+    background-image: url("../Images/radarSensorOn.png");
+}
+
+.sensorImageOff{
+    background-image: url("../Images/radarSensorOff.png");
+}
