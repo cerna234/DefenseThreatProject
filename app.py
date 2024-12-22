@@ -10,9 +10,10 @@ app.register_blueprint(sensor_bp)
 app.register_blueprint(threat_bp)
 
 #Home Route
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET','POST','PUT','DELETE'])
 def home():
     return jsonify({'HOME': 'HOME TEST'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use the environment variable for Heroku
+    app.run(host="0.0.0.0", port=port, debug=True)  # Make sure to bind on 0.0.0.0
