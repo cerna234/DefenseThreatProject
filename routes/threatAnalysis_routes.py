@@ -23,7 +23,7 @@ statusTable = db['sensorStatus']
 @threat_bp.route('/threatClassification/<string:route>', methods=['GET'])
 def threatClassification(route):
     try:
-        base_url = "http://127.0.0.1:5000"  # Update with your server's base URL
+        base_url = "https://defenseproject-fca5305c6d88.herokuapp.com/"  # Update with your server's base URL
         response = requests.get(f"{base_url}/{route}")
 
         # Ensure the request was successful
