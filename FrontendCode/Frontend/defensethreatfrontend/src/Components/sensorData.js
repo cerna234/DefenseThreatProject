@@ -9,7 +9,7 @@ const SensorDataModule = ({viewAllData}) => {
     const [sensorData, setSensorData] = useState()
     const [sensorDataAll, setSensorDataAll] = useState()
     const [sensorStatus, setSensorStatus] = useState()
- 
+    const apiUrl = process.env.REACT_APP_API_URL;
   
    
     useEffect(() => {
@@ -17,7 +17,7 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchAllData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:5000/threatClassification/allData");
+                const response = await fetch(`${apiUrl}/allData`);
                 const data = await response.json();
                 setSensorData(data);
             } catch (error) {
@@ -27,7 +27,8 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchLatestData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:5000/threatClassification/latestData");
+                console.log(`${apiUrl}/threatClassification/latestData`)
+                const response = await fetch(`${apiUrl}/threatClassification/latestData`);
                 const data = await response.json();
                 setSensorDataAll(data[0]);
                
@@ -39,14 +40,15 @@ const SensorDataModule = ({viewAllData}) => {
         const fetchStatus = async () => {
             try {
                 
-                const response = await fetch("http://127.0.0.1:5000/status");
+                const response = await fetch(`${apiUrl}/status`);
                 const data = await response.json();
                 setSensorStatus(data.sensorStatus);
                 console.log(data.sensorStatus)
-             
+
             }
             catch(error){
-                console.error("Error fetching status:", error);
+                
+                console.error(error);
             }
         }
 

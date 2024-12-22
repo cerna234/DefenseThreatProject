@@ -16,7 +16,7 @@ const HistoricalEnergyComponent = () => {
 
    const [energyDataStationary, setEnergyDataStationary] = useState([])
    const [energyDataMoving, setEnergyDataMoving] = useState([])
-
+   const apiUrl = process.env.REACT_APP_API_URL;
 
    useEffect(() => {
     const fetchEnergyData = async (url, setData, dataKey) => {
@@ -39,12 +39,12 @@ const HistoricalEnergyComponent = () => {
 
     const fetchAllEnergyData = () => {
         fetchEnergyData(
-            "https://defenseproject-fca5305c6d88.herokuapp.com/historicalEnergyStationary/",
+            `${apiUrl}/historicalEnergyStationary/`,
             setEnergyDataStationary,
             "StationaryTargetEnergyValue"
         );
         fetchEnergyData(
-            "https://defenseproject-fca5305c6d88.herokuapp.com/historicalEnergyMoving/",
+            `${apiUrl}/historicalEnergyMoving/`,
             setEnergyDataMoving,
             "MovementTargetEnergyValue"
         );

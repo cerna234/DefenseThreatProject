@@ -4,11 +4,11 @@ import axios from 'axios'
 
 const SensorStatusModule = () => {
   const [sensorStatus,setSensorStatus] = useState(null);
-  
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     
-    fetch('https://defenseproject-fca5305c6d88.herokuapp.com/status')
+    fetch(`${apiUrl}/status`)
     .then(response => {
       if(!response.ok){
         throw new Error("ERROR TEST")
@@ -29,7 +29,7 @@ const SensorStatusModule = () => {
 
       console.log(sensorStatus)
     if(sensorStatus === "off"){
-      axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/startSensor/6701c2b770792b8c21e7a55f')
+      axios.put(`${apiUrl}/startSensor/6701c2b770792b8c21e7a55f`)
         .then(response => {
 
           console.log(response)
@@ -41,7 +41,7 @@ const SensorStatusModule = () => {
     }
     else{
 
-      axios.put('https://defenseproject-fca5305c6d88.herokuapp.com/stopSensor/6701c2b770792b8c21e7a55f')
+      axios.put(`${apiUrl}/stopSensor/6701c2b770792b8c21e7a55f`)
         .then(response => {
           console.log(response)
           setSensorStatus("off")
