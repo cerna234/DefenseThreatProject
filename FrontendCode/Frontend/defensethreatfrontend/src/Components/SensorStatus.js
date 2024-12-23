@@ -75,7 +75,7 @@ const SensorStatusModule = () => {
           </div>
           <div className="radarImageContainer">
               <div className="sensorBase"></div>
-            {sensorStatus == "on" ?
+            {sensorStatus === "on" ?
 
               
                 <div className="sensorDishOn"></div>

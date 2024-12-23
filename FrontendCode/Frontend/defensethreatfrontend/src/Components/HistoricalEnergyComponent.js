@@ -3,8 +3,6 @@ import "../Components/HistoricalEnergyComponent.css"
 import {
     AreaChart, 
     Area,
-    LineChart,
-    Line,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -56,32 +54,10 @@ const HistoricalEnergyComponent = () => {
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval);
-}, []);
+}, [apiUrl, setEnergyDataStationary, setEnergyDataMoving]);
 
     
-    const data = [
-        
-            {
-          
-              uv: 100,
-       
-            },
-            {
-             
-              uv: 3000,
-         
-            },
-            {
-             
-              uv: 2000,
-            
-            },
-            {
-           
-              uv: 280,
-            
-            }
-      ];
+    
 
     return (
         <div className='historicalEnergyContainer'>

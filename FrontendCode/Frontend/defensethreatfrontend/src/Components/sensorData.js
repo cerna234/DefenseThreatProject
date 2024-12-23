@@ -60,8 +60,8 @@ const SensorDataModule = ({viewAllData}) => {
      
             const interval = setInterval(() => {
                 fetchStatus();
-                if(sensorStatus!= undefined){
-                    if(sensorStatus == "on"){
+                if(sensorStatus!== undefined){
+                    if(sensorStatus === "on"){
                         fetchAllData();
                         fetchLatestData();
                         console.log(sensorData)
@@ -83,7 +83,7 @@ const SensorDataModule = ({viewAllData}) => {
          
         
         
-    }, []);
+    }, [apiUrl,sensorData,sensorDataAll,sensorStatus]);
     
     
  
@@ -94,7 +94,7 @@ const SensorDataModule = ({viewAllData}) => {
         
         <h1 className="sensorModuleTitle"> Detecting...</h1>
         
-        {viewAllData == "true" ?
+        {viewAllData === "true" ?
         
         sensorData !== undefined && sensorDataAll !== undefined ?
              <div className="sensorDataContainerAll">
@@ -120,7 +120,7 @@ const SensorDataModule = ({viewAllData}) => {
 
                             <div className="EnergyContainerAll">
                                     <div className="EnergyContainerAllInner">
-                                        {value.TargetState == "Moving and Stationary Target Found" || value.TargetState == "Moving Target" ?
+                                        {value.TargetState === "Moving and Stationary Target Found" || value.TargetState === "Moving Target" ?
                                             <div>
                                                 <EnergyVisualComponent EnergyValue={value.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
                                                 <EnergyVisualComponent EnergyValue={value.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
@@ -167,7 +167,7 @@ const SensorDataModule = ({viewAllData}) => {
              
                 <div className="sensorData"  >
                      <div className="sensorOffOverlay"
-                        style={{opacity: sensorStatus == "on" ? "0%" : "100%"}}
+                        style={{opacity: sensorStatus === "on" ? "0%" : "100%"}}
                      >
                         
                         <h2>--- RADAR OFF ---</h2>
@@ -213,7 +213,7 @@ const SensorDataModule = ({viewAllData}) => {
                         
                         <div className="dataContainer">
 
-                        {sensorDataAll.TargetState == "Moving and Stationary Target Found" || sensorDataAll.TargetState == "Moving Target" ?
+                        {sensorDataAll.TargetState === "Moving and Stationary Target Found" || sensorDataAll.TargetState === "Moving Target" ?
                                             <div style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}} >
                                                 <EnergyVisualComponent EnergyValue={sensorDataAll.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
                                                 <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
@@ -223,7 +223,7 @@ const SensorDataModule = ({viewAllData}) => {
                                             :
                                             
                                             <div  style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}}>
-                                                {sensorDataAll.TargetState == "No Target" ? 
+                                                {sensorDataAll.TargetState === "No Target" ? 
                                                     <div>
                                                         {console.log("IT")}
                                                         <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>

@@ -1,7 +1,4 @@
 import "../Components/EnergyVisualComponent.css"
-import React, {useState, useEffect} from 'react';
-
-
 
 const EnergyVisualComponent = ({EnergyValue,EnergyValueTitle}) => {
   
