@@ -120,7 +120,7 @@ const SensorDataModule = ({viewAllData}) => {
 
                             <div className="EnergyContainerAll">
                                     <div className="EnergyContainerAllInner">
-                                        {value.TargetState === "Moving and Stationary Target Found" || value.TargetState == "Moving Target" ?
+                                        {value.TargetState === "Moving and Stationary Target Found" || value.TargetState === "Moving Target" ?
                                             <div>
                                                 <EnergyVisualComponent EnergyValue={value.MovementTargetEnergyValue} EnergyValueTitle="Moving Target"/>
                                                 <EnergyVisualComponent EnergyValue={value.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
