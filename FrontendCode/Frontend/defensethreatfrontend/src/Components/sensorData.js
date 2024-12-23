@@ -83,7 +83,7 @@ const SensorDataModule = ({viewAllData}) => {
          
         
         
-    }, []);
+    }, [apiUrl,sensorData,sensorDataAll,sensorStatus]);
     
     
  
