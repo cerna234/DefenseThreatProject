@@ -1,6 +1,4 @@
 import "../Components/SensorGrid.css"
-import React, {useState, useEffect} from 'react';
-
 
 const SensorGrid = ({StationaryTargetDistance,MovementTargetDistance,targetState, sensorStatus}) => {
   
@@ -26,25 +24,25 @@ const SensorGrid = ({StationaryTargetDistance,MovementTargetDistance,targetState
 
   return (
     <div className="SensorGrid" >
-        {targetState  == "Moving and Stationary Target Found" || targetState == "Moving Target" ?
+        {targetState  === "Moving and Stationary Target Found" || targetState === "Moving Target" ?
            <div>
            <div className="Radar"></div>
     
-           <div className="stationaryItem" style={{ left: `${gridClassification(StationaryTargetDistance)}px`, opacity: sensorStatus == "on" ? "100%" : "30%"}} >
+           <div className="stationaryItem" style={{ left: `${gridClassification(StationaryTargetDistance)}px`, opacity: sensorStatus === "on" ? "100%" : "30%"}} >
              <h2 className="distance">{StationaryTargetDistance}</h2>
            </div>
 
-           <div className={sensorStatus == "on"? "movingOptionOn" : "movingOptionOff"} style={{ left: `${gridClassification(MovementTargetDistance)}px` }}>
+           <div className={sensorStatus === "on"? "movingOptionOn" : "movingOptionOff"} style={{ left: `${gridClassification(MovementTargetDistance)}px` }}>
              <h2 className="distance">{MovementTargetDistance}</h2>
            </div>
            </div>
 
           :
-          targetState == "Stationary Target" ? 
+          targetState === "Stationary Target" ? 
           <div>
           <div className="Radar"></div>
    
-          <div className="stationaryItem" style={{ left: `${gridClassification(StationaryTargetDistance)}px`, opacity: sensorStatus == "on" ? "100%" : "30%" }} >
+          <div className="stationaryItem" style={{ left: `${gridClassification(StationaryTargetDistance)}px`, opacity: sensorStatus === "on" ? "100%" : "30%" }} >
             <h2 className="distance">{StationaryTargetDistance}</h2>
           </div>
 
