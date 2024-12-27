@@ -121,7 +121,7 @@ def stopSensor(id):  # Include the 'id' parameter here
 def getData():
     try:
         
-        data = list(collection.find())
+        data = list(collection.find().limit(40))
         
         
         json_data = dumps(data)
