@@ -27,7 +27,7 @@ const SensorDataModule = ({viewAllData}) => {
 
         const fetchLatestData = async () => {
             try {
-                console.log(`${apiUrl}/threatClassification/latestData`)
+              
                 const response = await fetch(`${apiUrl}/threatClassification/latestData`);
                 const data = await response.json();
                 setSensorDataAll(data[0]);
@@ -43,7 +43,7 @@ const SensorDataModule = ({viewAllData}) => {
                 const response = await fetch(`${apiUrl}/status`);
                 const data = await response.json();
                 setSensorStatus(data.sensorStatus);
-                console.log(data.sensorStatus)
+               
 
             }
             catch(error){
@@ -60,12 +60,12 @@ const SensorDataModule = ({viewAllData}) => {
      
             const interval = setInterval(() => {
                 fetchStatus();
+               
                 if(sensorStatus!== undefined){
                     if(sensorStatus === "on"){
                         fetchAllData();
                         fetchLatestData();
-                        console.log(sensorData)
-                        console.log(sensorDataAll)
+                 
                     }
                     else{
                         console.log("CURRENBT SENSOR STATUS" + sensorStatus)
@@ -83,7 +83,7 @@ const SensorDataModule = ({viewAllData}) => {
          
         
         
-    }, [apiUrl,sensorData,sensorDataAll,sensorStatus]);
+    }, [apiUrl,sensorStatus]);
     
     
  
@@ -225,7 +225,7 @@ const SensorDataModule = ({viewAllData}) => {
                                             <div  style={{ height: "100%" , width: "100%", display: "flex", justifyContent: "center" , alignItems:"center"}}>
                                                 {sensorDataAll.TargetState === "No Target" ? 
                                                     <div>
-                                                        {console.log("IT")}
+                                                
                                                         <EnergyVisualComponent EnergyValue={sensorDataAll.StationaryTargetEnergyValue} EnergyValueTitle="Stationary Target"/>
                                                     
                                                     </div>

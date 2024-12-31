@@ -54,7 +54,7 @@ const HistoricalEnergyComponent = () => {
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval);
-}, [apiUrl, setEnergyDataStationary, setEnergyDataMoving]);
+}, [apiUrl]);
 
     
     
