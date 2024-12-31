@@ -19,7 +19,7 @@ const SensorStatusModule = () => {
       setSensorStatus(data.sensorStatus)
     })
    
-  })
+  },[apiUrl])
 
   
   const toggleSensor = () => {
@@ -27,12 +27,11 @@ const SensorStatusModule = () => {
    
 
 
-      console.log(sensorStatus)
     if(sensorStatus === "off"){
       axios.put(`${apiUrl}/startSensor/6701c2b770792b8c21e7a55f`)
         .then(response => {
 
-          console.log(response)
+      
           setSensorStatus("on")
         })
         .catch(error => {
@@ -43,7 +42,7 @@ const SensorStatusModule = () => {
 
       axios.put(`${apiUrl}/stopSensor/6701c2b770792b8c21e7a55f`)
         .then(response => {
-          console.log(response)
+        
           setSensorStatus("off")
         })
         .catch(error => {
