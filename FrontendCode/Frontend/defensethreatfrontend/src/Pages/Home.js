@@ -4,7 +4,7 @@ import SensorDataModule from "../Components/sensorData"
 import HistoricalEnergyComponent from "../Components/HistoricalEnergyComponent"
 import "../Pages/Home.css"
 
-function Home() {
+function RadarPage() {
   return (
     <div className="homePageContainer">       
 
@@ -28,4 +28,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default RadarPage;
