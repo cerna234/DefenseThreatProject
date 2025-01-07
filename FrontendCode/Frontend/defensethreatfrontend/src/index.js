@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import ReactDOM from 'react-dom/client';  // Import createRoot from react-dom/client
+import App from './App';  // Importing App component
+import { BrowserRouter } from 'react-router-dom';  // Importing BrowserRouter from react-router-dom
 
-
+// Create a root using ReactDOM.createRoot and pass the DOM element with the id 'root'
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Render the App component inside the root using the .render() method
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter> {/* Wrap App with BrowserRouter */}
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
