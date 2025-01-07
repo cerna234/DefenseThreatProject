@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from routes.sensor_routes import sensor_bp
 from routes.threatAnalysis_routes import threat_bp
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
