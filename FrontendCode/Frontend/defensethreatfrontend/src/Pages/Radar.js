@@ -2,7 +2,7 @@
 import SensorStatusModule from "../Components/SensorStatus"
 import SensorDataModule from "../Components/sensorData"
 import HistoricalEnergyComponent from "../Components/HistoricalEnergyComponent"
-import "../Pages/Home.css"
+import "../Pages/Radar.css"
 
 function RadarPage() {
   return (
