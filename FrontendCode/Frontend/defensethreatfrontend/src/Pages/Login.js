@@ -1,10 +1,10 @@
-import react, {useState} from 'react'
+import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import "../Pages/Login.css"
 function LoginScreen() {
 
 
-  const [loginData,setLoginData] = useState();
+  /*const [loginData,setLoginData] = useState();*/
   const [username,setUsername] = useState("TEST")
   const [password,setPassword] = useState("TEST");
 
@@ -16,6 +16,7 @@ function LoginScreen() {
     e.preventDefault(); // Prevent the default form submission behavior
     console.log(username);
     console.log(password);
+    navigate('/radar')
     //handle logic to allow or not allow users into radar
 
 
