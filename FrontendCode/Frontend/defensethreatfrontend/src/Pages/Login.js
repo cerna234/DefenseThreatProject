@@ -7,9 +7,16 @@ function LoginScreen() {
   /*const [loginData,setLoginData] = useState();*/
   const [username,setUsername] = useState()
   const [password,setPassword] = useState();
-
+  const [incorrectPass,setIncorrectPass] = useState();
 
   const navigate = useNavigate();
+
+
+  const handleInputChange = (e,setValue) => {
+    setValue(e);
+    setIncorrectPass(false);
+  };
+  
 
   const handleSubmit = async (e) => {
 
@@ -33,7 +40,7 @@ function LoginScreen() {
         body: JSON.stringify(payload),
       });
     
-      if(response.status == 200){
+      if(response.status === 200){
         
         const data = await response.json();
   
@@ -43,7 +50,13 @@ function LoginScreen() {
         if(data.returnedLoginData !== "Incorrect Username or password" ){
           navigate('/radar')
         }
+        else{
+        
+            setIncorrectPass(true)
+          
+        }
       }
+      
      
     
     
@@ -68,16 +81,18 @@ function LoginScreen() {
             type="text"
             className="loginInput"
             placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)} 
+            onChange={(e) => handleInputChange(e.target.value,setUsername)} 
+       
+            
             
           />
           <input
             type="password"
             className="loginInput"
-            onChange={(e) => setPassword(e.target.value)} 
+            onChange={(e) => handleInputChange(e.target.value,setPassword)} 
          
           />
-          
+          <p className={incorrectPass ? "incorrectCreds" : "nonIncorrectCreds"}>Incorrect Username or Password</p>
           <button className='submitBtn' type="submit" onClick={handleSubmit}>LOGIN</button>
 
        </div>
