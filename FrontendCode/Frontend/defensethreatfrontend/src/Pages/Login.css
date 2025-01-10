@@ -50,3 +50,12 @@
     color: white;
     
 }
+
+.incorrectCreds{
+    color: red;
+    transition: ease-in 1s;
+}
+.nonIncorrectCreds{
+    color: red;
+    opacity: 0%;
+}
