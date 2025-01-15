@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify,request
+from flask import Blueprint, jsonify,request, make_response 
 from pymongo import MongoClient
 from datetime import datetime
 from bson import ObjectId,json_util
@@ -6,6 +6,7 @@ from bson.json_util import dumps
 from flask_jwt_extended import (
     JWTManager, create_access_token, jwt_required, get_jwt_identity
 )
+
 
 
 authentication_bp = Blueprint('authentication', __name__)
@@ -20,16 +21,24 @@ db = client['sensorDataDb']  # Your database name
 collection = db['Authentication']  # Your collection name
 
 
-
-
+@authentication_bp.route('/setcookie',methods=['POST']) 
+def setcookie(): 
+    # Checking if the request method is POST
+    if request.method == 'POST':
+        # Initializing response object 
+        resp = make_response('Setting the cookie')  
+        resp.set_cookie('GFG', 'ComputerScience Portal') 
+        return resp
+        
 @authentication_bp.route('/login', methods=['POST'])
 def login():
     try:
         
         data = request.json
 
-        print(data)
+       
         
+      
 
 
         if not data or not data.get("username"):
@@ -43,7 +52,10 @@ def login():
 
         if existing_user:
             access_token = create_access_token(identity=username)
-            return jsonify({"returnedLoginData": access_token})
+            resp = jsonify({"returnedLoginData": access_token})
+            resp.set_cookie('auth_token', access_token) 
+            return resp
+            
         else:
             return jsonify({"returnedLoginData": "Incorrect Username or password"})
 
@@ -55,3 +67,7 @@ def login():
         return jsonify({"error": str(e)}), 500
 
 
+@authentication_bp.route('/getcookie') 
+def getcookie(): 
+    GFG = request.cookies.get('GFG') 
+    return 'GFG is a '+ GFG 
