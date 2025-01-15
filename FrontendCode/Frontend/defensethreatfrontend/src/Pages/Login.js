@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import "../Pages/Login.css"
+import axios from 'axios'
 function LoginScreen() {
 
 
@@ -8,7 +9,7 @@ function LoginScreen() {
   const [username,setUsername] = useState()
   const [password,setPassword] = useState();
   const [incorrectPass,setIncorrectPass] = useState();
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
 
@@ -23,47 +24,40 @@ function LoginScreen() {
 
     e.preventDefault(); // Prevent the default form submission behavior
     
-    const url = "https://defenseproject-fca5305c6d88.herokuapp.com/login"
-    try {
-      
-
-      const payload = {
-        username: username,
-        password: password
-      }
-
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload),
-      });
+    const url = `${apiUrl}/login`
+   
     
-      if(response.status === 200){
+    const data = {
+      username: username,
+      password: password,
+    };
+   
+    axios.post(url, data, {
+      withCredentials: true,
+    })
+      .then(response => {
+        if(response.status === 200){
         
-        const data = await response.json();
-  
-       console.log(data)
-  
-         
-        if(data.returnedLoginData !== "Incorrect Username or password" ){
-          navigate('/radar')
-        }
-        else{
-        
-            setIncorrectPass(true)
           
+    
+         
+    
+          console.log(response)
+          if(response.data.returnedLoginData !== "Incorrect Username or password" ){
+            navigate('/radar')
+          }
+          else{
+              setIncorrectPass(true)
+            
+          }
         }
-      }
-      
-     
+      })
+      .catch(error => {
+        console.log("error", error.message)
+      })
     
     
 
-    } catch (error) {
-        console.error(`Error fetching data from ${url}:`, error);
-    }
     //handle logic to allow or not allow users into radar
    
     
