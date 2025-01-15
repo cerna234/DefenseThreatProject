@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import "../Pages/Login.css"
+import axios from 'axios'
 function LoginScreen() {
 
 
@@ -8,7 +9,7 @@ function LoginScreen() {
   const [username,setUsername] = useState()
   const [password,setPassword] = useState();
   const [incorrectPass,setIncorrectPass] = useState();
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
 
@@ -23,7 +24,7 @@ function LoginScreen() {
 
     e.preventDefault(); // Prevent the default form submission behavior
     
-    const url = "https://defenseproject-fca5305c6d88.herokuapp.com/login"
+    const url = `${apiUrl}/login`
    
     
     const data = {
