@@ -21,14 +21,13 @@ db = client['sensorDataDb']  # Your database name
 collection = db['Authentication']  # Your collection name
 
 
-@authentication_bp.route('/setcookie',methods=['POST']) 
+@authentication_bp.route('/setcookie',methods=['GET']) 
 def setcookie(): 
     # Checking if the request method is POST
-    if request.method == 'POST':
         # Initializing response object 
-        resp = make_response('Setting the cookie')  
-        resp.set_cookie('GFG', 'ComputerScience Portal') 
-        return resp
+    resp = make_response('Setting the cookie')  
+    resp.set_cookie('TEST', 'TESTCOOKIE') 
+    return resp
         
 @authentication_bp.route('/login', methods=['POST'])
 def login():
@@ -69,5 +68,5 @@ def login():
 
 @authentication_bp.route('/getcookie') 
 def getcookie(): 
-    GFG = request.cookies.get('GFG') 
-    return 'GFG is a '+ GFG 
+    Cookie = request.cookies
+    return jsonify(Cookie)
