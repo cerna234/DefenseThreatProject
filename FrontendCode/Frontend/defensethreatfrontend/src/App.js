@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import { BrowserRouter as   Router,Route, Routes, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as   Router,Route, Routes} from 'react-router-dom';
 
 import RadarPage from './Pages/Radar';
 import LoginScreen from './Pages/Login';
 
-const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
 
-  return isAuthenticated ? <Component {...rest} /> : <Navigate to="/" />;
-};
 
 
 function App() {
-  const [isAuthenticated] = useState(true); 
 
-  
+
  
   
   
@@ -26,7 +22,7 @@ function App() {
           <Route path="/" element={<LoginScreen />} />
           <Route
               path="/radar"
-              element={<ProtectedRoute component={RadarPage} isAuthenticated={isAuthenticated} />}
+              element={<RadarPage/>}
             />
         </Routes>
       </Router>

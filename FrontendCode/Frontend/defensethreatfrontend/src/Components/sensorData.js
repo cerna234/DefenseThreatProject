@@ -67,10 +67,7 @@ const SensorDataModule = ({viewAllData}) => {
                         fetchLatestData();
                  
                     }
-                    else{
-                        console.log("CURRENBT SENSOR STATUS" + sensorStatus)
-                        
-                    }
+                   
                 }
                 
                 
