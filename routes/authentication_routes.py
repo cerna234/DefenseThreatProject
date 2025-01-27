@@ -22,12 +22,11 @@ collection = db['Authentication']  # Your collection name
 
 
 @authentication_bp.route('/setcookie',methods=['GET']) 
-def setcookie(): 
-    # Checking if the request method is POST
-        # Initializing response object 
-    resp = make_response('Setting the cookie')  
-    resp.set_cookie('TEST', 'TESTCOOKIE') 
-    return resp
+def set_cookie():
+    response = make_response(jsonify(message="Cookie set"))
+    # Set the cookie with no domain specified, Flask will use 'localhost' or '127.0.0.1' as default
+    response.set_cookie('username', 'Miguel', max_age=60*60*24, path='/')
+    return response
         
 @authentication_bp.route('/login', methods=['POST'])
 def login():
@@ -52,7 +51,11 @@ def login():
         if existing_user:
             access_token = create_access_token(identity=username)
             resp = jsonify({"returnedLoginData": access_token})
-            resp.set_cookie('auth_token', access_token) 
+            resp.set_cookie(
+                'auth_token', 
+                access_token,
+                max_age=60*60*24
+                ) 
             return resp
             
         else:
