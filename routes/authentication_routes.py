@@ -54,7 +54,9 @@ def login():
             resp.set_cookie(
                 'auth_token', 
                 access_token,
-                max_age=60*60*24
+                max_age=60*60*24,
+                secure=True,  
+                samesite='None'
                 ) 
             return resp
             
