@@ -42,7 +42,7 @@ function LoginScreen() {
     
          
     
-          console.log(response)
+         
           if(response.data.returnedLoginData !== "Incorrect Username or password" ){
             navigate('/radar')
           }
