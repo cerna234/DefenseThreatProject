@@ -21,6 +21,7 @@ function RadarPage() {
     <div className="homePageContainer">       
 
         <div className="homePageOverLay"></div>
+        <h2 className="demo">(DEMO)</h2>
           <div className="gridSection">
             <SensorDataModule viewAllData="false"/>
           </div>

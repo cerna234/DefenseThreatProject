@@ -36,6 +36,14 @@ html, body {
   
 }
 
+
+.demo{
+  font-size: 50px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  z-index: 100;
+}
 .gridSection{
   width: 50%;
   height: 100%;
